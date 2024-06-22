@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [formGroup]="profileForm">
+
+
+  <div>
+    <ion-item lines="none" color="light" class="rowStyle">
+      <ion-label class="label-color" position="floating">First Name</ion-label>
+      <ion-input type="text" placeholder="FIrstName" formControlName="firstName"></ion-input>
+    </ion-item>
+    <!-- <div class="rowStyle" *ngIf="profileForm.controls?.name.touched && profileForm.controls?.name.invalid">
+      <ion-text>Enter valid name</ion-text>
+    </div> -->
+    <ion-item lines="none" color="light" class="rowStyle">
+      <ion-label class="label-color" position="floating">Last Name</ion-label>
+      <ion-input type="text" placeholder="lastName" formControlName="lastName"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none" color="light" class="rowStyle">
+      <ion-label class="label-color" position="floating">Gender</ion-label>
+      <ion-input type="text" placeholder="gender" formControlName="gender"></ion-input>
+    </ion-item>
+
+
+    <ion-item lines="none" color="light" class="rowStyle">
+      <ion-label class="label-color" position="floating">Phone</ion-label>
+      <ion-input type="number" placeholder="phone" formControlName="phone"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none" color="light" class="rowStyle">
+      <ion-label class="label-color" position="floating">Email</ion-label>
+      <ion-input type="email" placeholder="email" formControlName="email"></ion-input>
+    </ion-item>
+
+    <!-- <ion-item lines="none" color="light" class="rowStyle">
+      <ion-label class="label-color" position="floating">Date of Birth</ion-label>
+      <ion-datetime  formControlName="dob" ></ion-datetime>
+    </ion-item> -->
+
+    <ion-item lines="none" color="light" class="rowStyle">
+      <ion-label class="label-color" position="floating">State of Resident</ion-label>
+      <ion-input type="text" placeholder="Address" formControlName="address"></ion-input>
+    </ion-item>
+    <!-- <div class="rowStyle" *ngIf="profileForm.controls?.address?.touched && profileForm.controls?.address?.invalid">
+      <ion-text>State of Resident is required</ion-text>
+    </div> -->
+
+    <!-- <ion-item lines="none" class="align">
+      <ion-button expand="full">Full</ion-button>
+
+      <ion-button class="rowStyleButton" (click)="saveProfile()">Update</ion-button>
+    </ion-item> -->
+  </div>
+
+</ion-content>

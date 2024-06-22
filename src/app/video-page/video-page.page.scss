@@ -1,0 +1,112 @@
+.video-style {
+  margin-bottom: -4px;
+}
+
+.video-title {
+  font-size: 17px;
+  margin: 15px 10px 12px;
+  font-weight: bold;
+}
+
+.about-subheading {
+  font-size: 15px;
+  margin: 15px 10px 12px;
+  font-weight: bold;
+}
+
+.splitter {
+  margin-top: 16px !important;
+  color: #fff !important;
+}
+
+ul {
+  // list-style-image: url('');
+}
+
+.list-style {
+  padding: 5px;
+}
+
+.test-name {
+  font-size: 14px;
+  color: black;
+}
+
+vg-fullscreen {
+  position: absolute !important;
+  bottom: 0 !important;
+  right: 10px !important;
+}
+
+
+.vg-track-selector {
+  background-color: aqua !important;
+}
+
+.vg-track-selector .vg-track-selector-text {
+  color: blue !important;
+}
+
+.vg-track-selector .vg-track-selector-button {
+  background-color: green !important;
+}
+
+.content-container {
+  margin-top: 5px;
+}
+
+
+vg-scrub-bar-current-time {
+  div {
+    height: 20px !important;
+  }
+
+  background-color: red;
+}
+
+
+vg-scrub-bar .current-time-bar {
+  transition: width 0.3s ease-in-out;
+}
+
+.vg-slider-handle {
+  width: 24px;
+  height: 24px;
+  background-color: #FF5733;
+  border: 2px solid #E74C3C;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+// /* Rotate the volume slider container */
+// .vg-controls .vg-volume {
+//     transform: rotate(90deg) !important;
+//     transform-origin: top left !important;
+// }
+
+// /* Rotate the volume slider itself */
+// .vg-controls .vg-volume .vg-slider {
+//     transform: rotate(-90deg);
+//     transform-origin: top left;
+// }
+
+// /* Adjust the size and position of the rotated volume slider */
+// .vg-controls .vg-volume {
+//     width: 30px;
+//     height: 150px;
+//     margin-left: 20px;
+//     /* Adjust as needed */
+// }
+
+
+.vg-volume-slider {
+  color: aqua !important;
+}
+
+.vg-volume-slider .vg-volume-slider-knob {
+  background-color: blue !important;
+}
+
+.vg-volume-slider .vg-volume-slider-bar {
+  background-color: green !important;
+}

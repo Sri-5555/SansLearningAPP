@@ -1,0 +1,110 @@
+<ion-header color="primary" class="header">
+  <ion-toolbar class="toolbar">
+    <ion-title><ion-icon name="book" class="book-icon"></ion-icon>
+    <span class="title-text"> SansLearning</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="topbar-container">
+    <ion-segment mode="md" value="chapter" [scrollable]="true" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="chapter">
+        <ion-label>Chapter</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Videos">
+        <ion-label>Videos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Document">
+        <ion-label>Document</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Test">
+        <ion-label>Test</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+    <div class="page-container">
+    <!-- Chapter content -->
+    
+      <!-- <ion-item *ngFor="let chapter of chapters">
+        <div>
+          <h2>{{chapter.name}}</h2>
+          <div>
+            {{chapter.description}}
+          </div>
+        </div>
+        <ion-button expand="block"> 
+         learn more
+          <ion-icon  name="arrow-forward-circle-sharp"></ion-icon>
+        </ion-button>
+      </ion-item> -->
+
+      <!-- <ion-button slot="end"> <ion-icon name="arrow-forward-outline"></ion-icon> </ion-button> -->
+
+      <div *ngIf="segment=='chapter'">
+        <ion-card *ngFor="let chapter of chapters" class="chapter-card">
+          <ion-card-content>
+            <ion-card-title class="chapter-title">
+              {{chapter.name}}
+            </ion-card-title>
+            <div class="chapter-card-content">
+              {{chapter.description}}
+            </div>
+            <ion-button expand="block" (click)="redirectToChapter(chapter)">
+              Learn More
+              <ion-icon slot="end" name="arrow-forward-circle-sharp"></ion-icon>
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+    <!-- documemt Section -->
+    <div *ngIf="segment === 'Document'">
+      <ion-item *ngFor="let file of documents">
+        <ion-label>
+          <h2>{{file.name}}</h2>
+          <p>
+            {{file.format}} - {{file.size}}
+          </p>
+        </ion-label>
+        <ion-button slot="end" (click)="downloadDocument(file.url)"> <ion-icon name="download-outline"></ion-icon> </ion-button>
+      </ion-item>
+    </div>
+
+    <!-- video card section -->
+    <div *ngIf="segment === 'Videos'">
+      <div class="sub-Title-videos">
+        Top courses for you
+      </div>
+      <ion-card (click)="openVideoPage(video.id)" *ngFor="let video of videos" class="video-card">
+        <img class="video-style" width="100%" height="150px" [src]="video.bgURL" />
+        <ion-card-content class="video-detailsCont">
+          <div class="video-title">{{video.title}}</div>
+          <div class="video-des">{{video.description}}</div>
+          <div class="video-duration">
+            <ion-icon name="stopwatch-outline" class="time-icon"></ion-icon> 
+            <span class="video-duration-text">{{video.duration}}</span>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+  <!-- assesment section -->
+  <div *ngIf="segment === 'Test'">
+    <ion-card *ngFor="let test of assessments" class="test-card">
+      <ion-card-content>
+        <div class="test-name"><span class="test-content">Test Name: </span>{{test.name}}</div>
+        <div class="test-questions"><span class="test-content">Questions: </span>{{test.questions.length}}</div>
+        <div class="test-time">
+          <ion-icon name="stopwatch-outline" class="time-icon"></ion-icon>
+          <span class="test-content">Time: </span>{{test.time}}</div>
+        <ion-button (click)="takeAssessment(test)" expand="block">
+          Take Test
+          <ion-icon slot="end" name="arrow-forward-circle-sharp"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</div>
+</ion-content>
+
+<!-- <ion-button (click)="uploadSegmentData()">Upload</ion-button> -->

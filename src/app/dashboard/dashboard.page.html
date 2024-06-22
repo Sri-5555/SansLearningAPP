@@ -1,0 +1,21 @@
+<ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home">
+        <ion-icon class="footerIcon"  name="home"></ion-icon>
+        Home
+      </ion-tab-button>
+    
+      <ion-tab-button tab='profile'>
+        <ion-icon class="footerIcon" name="person"></ion-icon>
+        Profile
+      </ion-tab-button>
+      <ion-tab-button tab="help">
+        <ion-icon class="footerIcon" name="help-circle"></ion-icon>
+        Help
+      </ion-tab-button>
+      <ion-tab-button tab="" (click)="logout()">
+        <ion-icon class="footerIcon" name="log-out"></ion-icon>
+        Logout
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>

@@ -1,0 +1,72 @@
+<ion-content>
+  <div class="video-container">
+    <vg-player #vgPlayer>
+      <vg-overlay-play></vg-overlay-play>
+      <vg-buffering></vg-buffering>
+      <vg-scrub-bar>
+        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+      </vg-scrub-bar>
+      <vg-controls>
+        <vg-play-pause></vg-play-pause>
+        <vg-playback-button></vg-playback-button>
+        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display><span class="splitter">/</span>
+        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+        <vg-track-selector
+          style="width: 100%; height: 20px; position: absolute; bottom: 0; left: 0;"></vg-track-selector>
+        <vg-fullscreen></vg-fullscreen>
+      </vg-controls>
+      <video #media [vgMedia]="$any(media)" [currentTime]="startTime" preload="auto">
+        <source src="../assets/trailer.mp4" type="video/mp4">
+      </video>
+    </vg-player>
+  </div>
+
+  <div class="content-container">
+  <ion-segment [(ngModel)]="viewMode" value="documents" mode="ios" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="default">
+      <ion-label>Course Detail</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="documents">
+      <ion-label>Documents</ion-label>
+    </ion-segment-button>
+    <!-- <ion-segment-button value="assessment">
+      <ion-label>Assessment</ion-label>
+    </ion-segment-button> -->
+  </ion-segment>
+
+  <div *ngIf="viewMode=='default'">
+    <div class="video-title">{{video.title}}</div>
+    <div class="about-subheading">
+      What you'll learn
+    </div>
+    <ul>
+      <li class="list-style" *ngFor="let detail of video.content">{{detail.text}}</li>
+    </ul>
+  </div>
+
+  <div *ngIf="viewMode=='documents'">
+    <ion-item *ngFor="let file of video.files">
+      <ion-label>
+        <h2>{{file.name}}</h2>
+        <p>
+          {{file.format}} - {{file.size}}
+        </p>
+      </ion-label>
+      <ion-button slot="end"> <ion-icon name="download-outline"></ion-icon> </ion-button>
+    </ion-item>
+  </div>
+
+  <!-- <div *ngIf="viewMode=='assessment'">
+    <ion-card *ngFor="let test of assessment">
+      <ion-card-content>
+        <div class="test-name">{{test.name}}</div>
+        <ion-button (click)="takeAssessment(test)" expand="block">
+          Take Test
+          <ion-icon slot="end" name="arrow-forward-circle-sharp"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div> -->
+</div>
+</ion-content>

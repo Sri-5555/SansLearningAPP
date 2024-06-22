@@ -1,0 +1,15 @@
+:host {
+    ion-content {
+        --ion-background-color: #fff !important;
+    }
+
+    :host(.ion-color:not(.item-fill-solid):not(.item-fill-outline)) .item-native {
+        background: #fff !important;
+    }
+
+    .ion-color-light {
+        --ion-color-base: #fff !important;
+    }
+
+    --border-color: var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(0, 0, 0, 0.13))))
+}

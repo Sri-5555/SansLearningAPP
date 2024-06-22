@@ -1,0 +1,21 @@
+<ng-container *ngIf="data.segment == 'chapter'">
+  <h6 class="title">{{data.segment | uppercase}} DATA UPLOAD</h6>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="chapter-form">
+    <ion-item class="form-item">
+      <ion-label position="floating">Name</ion-label>
+      <ion-input formControlName="name" type="text"></ion-input>
+    </ion-item>
+    <ion-item class="form-item">
+      <ion-label position="floating">Description</ion-label>
+      <ion-input formControlName="description" type="text"></ion-input>
+    </ion-item>
+    <ion-item class="form-item">
+      <ion-label position="floating">Content</ion-label>
+      <ion-input formControlName="content" type="text"></ion-input>
+    </ion-item>
+    <div class="button-container">
+      <ion-button type="submit" [disabled]="!form.valid" class="submit-button">Submit</ion-button>
+      <ion-button (click)="dismiss()" class="cancel-button">Cancel</ion-button>
+    </div>
+  </form>
+</ng-container>

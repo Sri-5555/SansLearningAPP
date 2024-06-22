@@ -1,0 +1,73 @@
+<ion-content color="primary" padding [formGroup]="signupForm">
+    <ion-row class="icon-container">
+        <ion-icon name="book" color="light" class="icon"></ion-icon>
+    </ion-row>
+  
+    <ion-item lines="none" color="primary" class="text1">
+      <ion-label>SansLearn</ion-label>
+    </ion-item>
+    
+    <div>
+      <ion-item lines="none" color="light" class="rowStyle">
+        <ion-input type="text" placeholder="Name" formControlName="name"></ion-input>
+      </ion-item>
+      <div class="rowStyle" *ngIf="signupForm.controls?.name.touched && signupForm.controls?.name.invalid">
+        <ion-text class="error-message">Enter valid name</ion-text>
+      </div>
+
+      <ion-item lines="none" color="light" class="rowStyle">
+        <ion-label position="floating">DOB</ion-label>
+        <ion-input type="date" placeholder="DOB" formControlName="dob"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" color="light" class="rowStyle">
+        <ion-select placeholder="Gender" formControlName="gender">
+          <ion-select-option value="male">Male</ion-select-option>
+          <ion-select-option value="female">Female</ion-select-option>
+          <ion-select-option value="others">Others</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none" color="light" class="rowStyle">
+        <ion-input type="text" maxlength="10" placeholder="Mobile" formControlName="mobile"></ion-input>
+      </ion-item>
+      <div class="rowStyle" *ngIf="signupForm.controls?.mobile.touched && signupForm.controls?.mobile.invalid">
+        <ion-text class="error-message">Enter valid mobile number</ion-text>
+      </div>
+
+      <ion-item lines="none" color="light" class="rowStyle">
+        <ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <div class="rowStyle" *ngIf="signupForm.controls?.email?.touched && signupForm.controls?.email?.invalid">
+        <ion-text class="error-message">Enter valid mail</ion-text>
+      </div>
+      <ion-item lines="none" color="light" class="rowStyle">
+        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+      </ion-item>
+      <div class="rowStyle" *ngIf="signupForm.controls?.password?.touched && signupForm.controls?.password?.invalid">
+        <ion-text class="error-message">Enter valid password</ion-text>
+      </div>
+      <ion-item lines="none" color="light" class="rowStyle">
+        <ion-input type="password" placeholder="Confirm Password" formControlName="confirmPassword"></ion-input>
+      </ion-item>
+      <div class="rowStyle" *ngIf="signupForm.controls?.confirmPassword?.touched && signupForm.controls?.confirmPassword?.errors?.required">
+        <ion-text class="error-message">Confirm Password is required</ion-text>
+      </div>
+      <div class="rowStyle" *ngIf="signupForm.controls?.confirmPassword?.touched && signupForm.controls?.confirmPassword?.errors?.passwordsDontMatch">
+        <ion-text class="error-message">Passwords should match</ion-text>
+      </div>
+      <ion-item lines="none" color="light" class="rowStyle">
+        <ion-input type="text" placeholder="Address" formControlName="address"></ion-input>
+      </ion-item>
+      <div class="rowStyle" *ngIf="signupForm.controls?.address?.touched && signupForm.controls?.address?.invalid">
+        <ion-text class="error-message">Address is required</ion-text>
+      </div>
+      <ion-item lines="none" class="align" color="primary">
+        <button color="primary" class="rowStyleButton" (click)="signup()">SignUp</button>
+      </ion-item>
+      <ion-item lines="none" class="align-signin" color="primary">
+        <button clear color="primary" class="rowStyleButton" (click)="gotoLogin()">Back to Signin</button>
+      </ion-item>
+    </div>
+</ion-content>

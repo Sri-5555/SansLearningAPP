@@ -1,0 +1,127 @@
+.label-color {
+    font-size: 15px !important;
+    color: #999999;
+    // font-style: 'bold' !important;
+    // font-weight: 700 !important;
+}
+
+.image-container {
+    text-align: center;
+    border-bottom: 1px solid black;
+    padding: 1rem 0rem;
+}
+   
+ion-content {
+    --ion-background-color: #ededed !important;
+}
+
+.ion-color-light {
+    --ion-color-base: #ededed !important;
+}
+
+.profile-header {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 15px;
+}
+
+.profile-nameText {
+    font-weight: bold;
+    font-size: 25px;
+    color: #000;
+}
+
+.profile-emailText {
+    font-size: 23px;
+    color: #000;
+}
+
+.button {
+    height: 32px !important;
+    background: #54ab7f !important;
+    border-radius: 10px !important;
+}
+
+.ion-color-profileColor {
+    --ion-color-base: #54ab7f !important;
+    --ion-color-contrast: #fff !important;
+    --ion-color-contrast-rgb: #fff !important;
+}
+
+
+.ion-color-myLearning {
+    --ion-color-base: #1C59A5 !important;
+    --ion-color-contrast: #fff !important;
+    --ion-color-contrast-rgb: #fff !important;
+}
+
+.ion-color-logout {
+    --ion-color-base: #EE3F3E !important;
+    --ion-color-contrast: #fff !important;
+    --ion-color-contrast-rgb: #fff !important;
+}
+
+.ion-color-about {
+    --ion-color-base: #FC6C22 !important;
+    --ion-color-contrast: #fff !important;
+    --ion-color-contrast-rgb: #fff !important;
+}
+
+.rowStyle {
+    // margin-bottom: 4px;
+}
+
+.form-lable {
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    color: #333 !important;
+}
+
+.form-input {
+    color: #000;
+    font-weight: 400;
+    --placeholder-color: #999;
+    --padding-start: 25px; 
+    --padding-end: 10px;
+    margin-top:4px;
+}
+
+.form-input-disabled {
+    color: grey !important;
+    pointer-events: none !important;
+}
+
+.user-form-details {
+    padding: 0 10px;
+    margin-top: 5px;
+}
+
+.user-icons {
+    margin-right: 10px;
+    vertical-align: top;
+}
+
+.user-edit-icon {
+    vertical-align: top;
+    margin-right: 5px;
+}
+
+.edit-text {
+    margin-right: 10px;
+}
+
+.save-button-container {
+    text-align: center;
+}
+
+.save-button {
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.disable-pointer-events {
+    pointer-events: none;
+    color: grey !important;
+  }

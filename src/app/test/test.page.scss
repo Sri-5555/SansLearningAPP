@@ -1,0 +1,135 @@
+.question-container {
+    margin: 3rem 1rem 5rem;
+    height: fit-content;
+}
+
+.question-number {
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.question {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.option-container {
+    margin: 1rem 0rem 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    label {
+        display: flex;
+        cursor: pointer;
+        font-weight: 500;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 0.375em;
+    }
+
+    input {
+        position: absolute;
+        left: -9999px;
+    }
+
+    input:checked {
+        background-color: rgb(84, 84, 238);
+        color: white;
+    }
+
+    input:checked + span:before {
+        box-shadow: inset 0 0 0 0.4375em rgb(84, 84, 238);
+    }
+
+    span {
+        display: flex;
+        align-items: center;
+        padding: 0.375em 0.75em 0.375em 0.375em;
+        transition: 0.25s ease;
+        color: #000;
+    }
+
+    span:hover {
+        background-color: #d6d6e5;
+    }
+
+    span:before {
+        display: flex;
+        flex-shrink: 0;
+        content: "";
+        background-color: #fff;
+        width: 1.5em;
+        height: 1.5em;
+        border-radius: 50%;
+        margin-right: 0.375em;
+        transition: 0.25s ease;
+        box-shadow: inset 0 0 0 0.125em rgb(84, 84, 238);
+    }
+}
+
+.option {
+    font-size: 16px;
+    margin-top: 12px;
+}
+
+.next-button {
+    width: 100%;
+}
+
+.action-buttons {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    z-index: 10;
+    background-color: white;
+  }
+
+ion-button {
+    &[disabled] {
+        opacity: 1;
+        --background: grey;
+    }
+}
+
+.bold-text {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.red-color {
+    color: #DC3545;
+}
+
+.green-color {
+    color: #008000;
+}
+
+.result-container {
+    margin: 1rem;
+}
+
+.result-card {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.result-number {
+    margin-left: -16px;
+}
+
+.result-question {
+    margin-left: 13px;
+    margin-top: 15px;
+
+}
+
+.option-text {
+    margin-left: 8px;
+}

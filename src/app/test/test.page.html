@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Assesment</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!-- <div class="example-content">Profile content</div> -->
+  <div *ngIf="!showResults" class="question-number">
+    {{currentQuestionIndex +1}}/{{questions.length}} Questions
+  </div>
+  <div class="question-container" *ngIf="!showResults">
+    <div class="question">
+      <!-- {{currentQuestionIndex +1}}. -->
+      {{ currentQuestion.question }}
+    </div>
+    <div class="option-container">
+      <div class="option" *ngFor="let choice of currentQuestion.choices">
+        <input type="radio" name="answer" [(ngModel)]="selectedChoice" [value]="choice">
+        <span class="option-text" (click)="optionSelected(choice)">{{ choice }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="action-buttons">
+    <ion-button [disabled]="selectedChoice == ''" class="next-button" *ngIf="!showResults" (click)="submitAnswer()"
+      type="solid" expand="full">{{ buttonText()}}</ion-button>
+  </div>
+  <div class="result-container" *ngIf="showResults">
+    <h2>Result</h2>
+    <ion-card>
+      <ion-card-content class="result-card">
+        <b>{{getCorrectAnswerNumber()}}</b> of <b>{{questions.length}}</b> questions answered correctly
+      </ion-card-content>
+    </ion-card>
+    <div class="result-question" *ngFor="let result of results;let i=index">
+      <div><span class="result-number">{{i+1}}.</span> {{ result.question }}</div>
+      <div><span class="bold-text">Your Answer : </span> <span
+          [ngClass]="{'green-color': result.selectedChoice == result.correctChoice,'red-color': result.selectedChoice != result.correctChoice}">{{
+          result.selectedChoice }}</span> </div>
+      <div *ngIf="result.selectedChoice != result.correctChoice"><span class="bold-text">Correct Answer :</span> {{
+        result.correctChoice }}</div>
+    </div>
+  </div>
+</ion-content>
