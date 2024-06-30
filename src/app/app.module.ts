@@ -16,18 +16,25 @@ import { VideoPlayer } from '@ionic-native/video-player/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { AngularFireModule } from '@angular/fire/compat';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpInterceptorService } from '../app/services/http-interceptor.service'
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())
   ],
-  providers: [VideoPlayer,File,
-    HTTP,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [VideoPlayer, File,
+    HTTP, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+
+export class AppModule { }

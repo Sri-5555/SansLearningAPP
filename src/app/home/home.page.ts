@@ -29,10 +29,12 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    this.getChaptersData();
-    this.getVideosData();
-    this.getAssessmentsData();
-    this.getDocumentData();
+    setTimeout(() => {
+      this.getChaptersData();
+      this.getVideosData();
+      this.getAssessmentsData();
+      this.getDocumentData();
+    }, 1000);
   }
 
   playVideo(video) {

@@ -5,14 +5,15 @@ import { IonicModule } from '@ionic/angular';
 
 import { ChapterViewRoutingModule } from './chapter-view-routing.module';
 import { ChapterViewComponent } from './chapter-view.component';
-
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ChapterViewRoutingModule
+    ChapterViewRoutingModule,
+    PdfViewerModule
   ],
   declarations: [ChapterViewComponent],
 })

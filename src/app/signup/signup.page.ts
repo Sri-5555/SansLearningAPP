@@ -50,7 +50,7 @@ export class SignupPage{
       mobile:['',[Validators.required, mobileNumberValidator()]],
       password: ['', [Validators.required]],
       confirmPassword: ['', Validators.required],
-      address: ['', Validators.required],
+      university: ['', Validators.required],
     }, { validators: passwordsMatchValidator() });
   }
 
