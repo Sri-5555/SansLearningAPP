@@ -18,4 +18,8 @@ export class DashboardPage {
       this.navCtrl.navigateRoot('login');
     })
   }
+  
+  home() {
+    this.navCtrl.navigateRoot('dashboard/studymaterial');
+  }
 }

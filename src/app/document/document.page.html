@@ -1,0 +1,37 @@
+<ion-header color="primary" class="header">
+  <ion-toolbar class="toolbar">
+    <ion-title><ion-icon name="book" class="book-icon"></ion-icon>
+    <span class="title-text"> SansLearning-3</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="topbar-container">
+    <ion-segment mode="md" value="studymaterial" [scrollable]="true" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="studymaterial">
+        <ion-label>Study Material</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="document">
+        <ion-label>PPT</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="testList">
+        <ion-label>Test</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+</ion-content>
+
+<div class="page-container">
+  <!-- documemt Section -->
+  <div>
+    <ion-item *ngFor="let file of documents">
+      <ion-label>
+        <h2>{{file.name}}</h2>
+        <p>
+          {{file.format}} - {{file.size}}
+        </p>
+      </ion-label>
+      <ion-button slot="end" (click)="downloadDocument(file.url)"> <ion-icon name="download-outline"></ion-icon> </ion-button>
+    </ion-item>
+  </div>
+</div>

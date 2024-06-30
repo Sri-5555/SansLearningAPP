@@ -56,7 +56,7 @@ export class LoginPage {
             this.toast.warningToast("Failed to get ID token");
           });
           this.toast.sucessToast("Login successfull");
-          this.navCntrl.navigateForward('dashboard/home');
+          this.navCntrl.navigateForward('dashboard/studymaterial');
         } else {
           this.toast.warningToast("Please verify email.");
           sendEmailVerification(res.user,

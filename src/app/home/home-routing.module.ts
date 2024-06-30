@@ -7,10 +7,6 @@ const routes: Routes = [
     path: '',
     component: HomePage
   },
-  {
-    path: 'chapterView',
-    loadChildren: () => import('../chapter-view/chapter-view.module').then(m => m.ChapterViewModule)
-  }
 ];
 
 @NgModule({

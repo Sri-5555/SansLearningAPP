@@ -22,7 +22,15 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
-  }
+  },
+  {
+    path: 'document',
+    loadChildren: () => import('./document/document.module').then( m => m.DocumentPageModule)
+  },
+  {
+    path: 'testlist',
+    loadChildren: () => import('./testlist/testlist.module').then( m => m.TestlistPageModule)
+  },
 ];
 
 @NgModule({

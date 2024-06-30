@@ -10,11 +10,19 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'home',
+        redirectTo: 'studymaterial',
       },
       {
-        path: 'home',
-        loadChildren: () => import('../home/home.module').then((m) => m.HomePageModule),
+        path: 'studymaterial',
+        loadChildren: () => import('../studymaterial/studymaterial.module').then((m) => m.StudymaterialPageModule),
+      },
+      {
+        path: 'document',
+        loadChildren: () => import('../document/document.module').then((m) => m.DocumentPageModule),
+      },
+      {
+        path: 'testList',
+        loadChildren: () => import('../testlist/testlist.module').then((m) => m.TestlistPageModule),
       },
       {
         path: 'profile',
