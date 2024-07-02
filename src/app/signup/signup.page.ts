@@ -45,7 +45,6 @@ export class SignupPage{
           Validators.email,
         ],
       ],
-      dob:['',[Validators.required]],
       gender:['',[Validators.required]],
       mobile:['',[Validators.required, mobileNumberValidator()]],
       password: ['', [Validators.required]],
@@ -56,10 +55,6 @@ export class SignupPage{
 
   get email() {
     return this.signupForm.get('email');
-  }
-
-  get dob() {
-    return this.signupForm.get('dob');
   }
 
   get gender() {
@@ -82,21 +77,22 @@ export class SignupPage{
     return this.signupForm.get('name');
   }
 
-  get address() {
-    return this.signupForm.get('address');
+  get university() {
+    return this.signupForm.get('university');
   }
+
 
   signup() {
     if (this.signupForm.valid) {
       console.log("signupForm",this.signupForm,this.signupForm.value);
-      const { name, email, password, address, dob, gender, mobile } = this.signupForm.value;     
+      const { name, email, password, gender, mobile, university } = this.signupForm.value;     
       createUserWithEmailAndPassword(
         this.auth,
         email,
         password,
       ).then((res: any) => {
         console.log(res)
-        this.usersService.addUser({ uid: res.user.uid, email, name, address, dob, gender, mobile }).subscribe(res => {
+        this.usersService.addUser({ uid: res.user.uid, email, name, gender, mobile, university }).subscribe(res => {
           this.toast.sucessToast('User created successfully');
         });
 

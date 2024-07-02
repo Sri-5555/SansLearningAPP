@@ -7,7 +7,7 @@
 </ion-header>
 <ion-content>
   <div class="topbar-container">
-    <ion-segment mode="md" value="studymaterial" [scrollable]="true" (ionChange)="segmentChanged($event)">
+    <ion-segment mode="md" [value]="segment" [scrollable]="true" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="studymaterial">
         <ion-label>Study Material</ion-label>
       </ion-segment-button>
@@ -19,8 +19,21 @@
       </ion-segment-button>
     </ion-segment>
   </div>
-</ion-content>
 
-<div>
-  test test material 
+ <!-- assesment section -->
+ <div class="page-container">
+  <ion-card *ngFor="let test of assessments" class="test-card">
+    <ion-card-content>
+      <div class="test-name"><span class="test-content">Test Name: </span>{{test.name}}</div>
+      <div class="test-questions"><span class="test-content">Questions: </span>{{test.questions.length}}</div>
+      <div class="test-time">
+        <ion-icon name="stopwatch-outline" class="time-icon"></ion-icon>
+        <span class="test-content">Time: </span>{{test.time}}</div>
+      <ion-button (click)="takeAssessment(test)" expand="block">
+        Take Test
+        <ion-icon slot="end" name="arrow-forward-circle-sharp"></ion-icon>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </div>
+</ion-content>

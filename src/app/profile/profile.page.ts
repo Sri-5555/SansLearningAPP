@@ -36,10 +36,11 @@ export class ProfilePage {
   ) { }
 
   ngOnInit(): void {
-    console.log("profile component");
-    this.uid = localStorage.getItem('uid');
-    this.idToken = localStorage.getItem('idToken');
-    this.getProfileDetails();
+    setTimeout(() => {
+      this.uid = localStorage.getItem('uid');
+      this.idToken = localStorage.getItem('idToken');
+      this.getProfileDetails();
+    }, 0);
     // this.profileForm.disable();
   }
 

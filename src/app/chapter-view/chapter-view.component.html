@@ -1,12 +1,7 @@
 <ion-content class="content-wrapper">
-  <ion-card>
-    <ion-card-content>
-      <div class="pdf-container">
-        <pdf-viewer [src]="pdfSrc" [render-text]="true" style="display: block; width: 100%;"></pdf-viewer>
-      </div>
-      <p>
-        {{chapterContent}}
-      </p>
-    </ion-card-content>
-  </ion-card>
+  <div class="pdf-container" *ngIf="chapterUrl.length">
+    <pdf-viewer [src]="chapterUrl" [rotation]="0" [original-size]="false" [show-all]="true" [fit-to-page]="true" [zoom]="1"
+      [zoom-scale]="'page-width'" [stick-to-page]="false" [render-text]="true" [external-link-target]="'blank'"
+      [autoresize]="true" [show-borders]="false" style="width: 100%; height: 100vh;"></pdf-viewer>
+  </div>
 </ion-content>

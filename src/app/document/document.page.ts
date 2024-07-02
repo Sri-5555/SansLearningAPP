@@ -15,11 +15,18 @@ export class DocumentPage implements OnInit {
   constructor(private router: Router, public dataService: DataService) { }
 
   ngOnInit() {
-    this.getDocumentData();
+    setTimeout(() => {
+      this.segment = 'document';
+      this.getDocumentData();
+    }, 0);
+  }
+
+  ionViewWillEnter() {
+    this.segment = 'document';
   }
 
   segmentChanged(event) {
-    console.log("event", event.detail.value);
+    this.segment =  event.detail.value;
     this.router.navigate([`dashboard/${event.detail.value}`]);
   }
 
@@ -48,4 +55,5 @@ export class DocumentPage implements OnInit {
     console.log('url:', url);
     window.open(url, "_blank");
   }
+
 }

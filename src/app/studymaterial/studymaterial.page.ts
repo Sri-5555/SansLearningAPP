@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { map } from 'rxjs/operators';
 
@@ -14,12 +14,20 @@ export class StudymaterialPage implements OnInit {
   constructor(private router: Router, public dataService: DataService) { }
 
   ngOnInit() {
-    this.getChaptersData();
+    setTimeout(() => {
+      this.segment = 'studymaterial';
+      this.getChaptersData();
+    }, 0);
   }
 
   segmentChanged(event) {
-    console.log("event", event.detail.value);
+    this.segment =  event.detail.value;
+    console.log("event", this.segment);
     this.router.navigate([`dashboard/${event.detail.value}`]);
+  }
+
+  ionViewWillEnter() {
+    this.segment = 'studymaterial';
   }
 
   getChaptersData() {
@@ -41,6 +49,16 @@ export class StudymaterialPage implements OnInit {
       }, err => {
         console.log(err);
       });
+  }
+
+  redirectToChapter(chapter) {
+    chapter.url = '1.pdf';
+    let data: NavigationExtras = {
+      state: {
+        chapterData: chapter
+      }
+    };
+    this.router.navigate(['dashboard/chapterView'],data);
   }
 
 }

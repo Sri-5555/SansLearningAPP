@@ -7,7 +7,7 @@
 </ion-header>
 <ion-content>
   <div class="topbar-container">
-    <ion-segment mode="md" value="studymaterial" [scrollable]="true" (ionChange)="segmentChanged($event)">
+    <ion-segment mode="md" [value]="segment" [scrollable]="true" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="studymaterial">
         <ion-label>Study Material</ion-label>
       </ion-segment-button>
@@ -19,7 +19,6 @@
       </ion-segment-button>
     </ion-segment>
   </div>
-</ion-content>
 
 <div class="page-container">
   <!-- documemt Section -->
@@ -35,3 +34,4 @@
     </ion-item>
   </div>
 </div>
+</ion-content>

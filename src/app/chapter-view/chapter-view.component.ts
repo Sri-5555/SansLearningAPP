@@ -7,16 +7,17 @@ import { FileService } from '../services/file.service';
   styleUrls: ['./chapter-view.component.scss'],
 })
 export class ChapterViewComponent implements OnInit {
-@Input() chapterData:any;
+  chapterData:any;
   chapterContent:string = '';
-  pdfSrc = 'https://cors-anywhere.herokuapp.com/https://sanslearning.000webhostapp.com/1.pdf';
+  chapterUrl:string='';
   constructor(private route: ActivatedRoute,private fileService:FileService) { }
 
   fileName:any = '';
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      const chapterData = history.state.chapterData;
-      this.chapterContent = chapterData.content;
+      this.chapterData = history.state.chapterData;
+      this.chapterContent = this.chapterData.content;
+      this.chapterUrl = `../../assets/studyMaterials/${this.chapterData.url}`;
     });
     this.fileName = '';
     // this.getPdf();
@@ -27,5 +28,15 @@ export class ChapterViewComponent implements OnInit {
   //     console.log('res:',res);
   //   });
   // }
+
+  ionViewWillEnter() {
+    this.route.paramMap.subscribe(params => {
+      this.chapterData = history.state.chapterData;
+      this.chapterContent = this.chapterData.content;
+      this.chapterUrl = `../../assets/studyMaterials/${this.chapterData.url}`;
+      console.log(this.chapterUrl);
+    });
+    this.fileName = '';
+  }
 
 }
