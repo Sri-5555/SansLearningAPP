@@ -22,7 +22,6 @@ export class StudymaterialPage implements OnInit {
 
   segmentChanged(event) {
     this.segment =  event.detail.value;
-    console.log("event", this.segment);
     this.router.navigate([`dashboard/${event.detail.value}`]);
   }
 
