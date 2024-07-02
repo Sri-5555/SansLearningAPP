@@ -20,10 +20,11 @@
     </ion-segment>
   </div>
 
-<div>
-  test study material
+<div class="loaders" *ngIf="chapters.length == 0">
+  <img src="/assets/Images/loader.svg" class="loader-image">
 </div>
-<div class="page-container">
+
+<div class="page-container" *ngIf="chapters.length">
     <div>
       <ion-card *ngFor="let chapter of chapters" class="chapter-card">
         <ion-card-content>

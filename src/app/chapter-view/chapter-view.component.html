@@ -1,4 +1,8 @@
 <ion-content class="content-wrapper">
+  <ion-button fill="clear" (click)="goBack()">
+    <ion-icon slot="start" name="arrow-back"></ion-icon>
+    Back
+  </ion-button>  
   <div class="pdf-container" *ngIf="chapterUrl.length">
     <pdf-viewer [src]="chapterUrl" [rotation]="0" [original-size]="false" [show-all]="true" [fit-to-page]="true" [zoom]="1"
       [zoom-scale]="'page-width'" [stick-to-page]="false" [render-text]="true" [external-link-target]="'blank'"

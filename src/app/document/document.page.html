@@ -20,7 +20,11 @@
     </ion-segment>
   </div>
 
-<div class="page-container">
+  <div class="loaders" *ngIf="documents.length == 0">
+    <img src="/assets/Images/loader.svg">
+  </div>
+
+<div class="page-container" *ngIf="documents.length">
   <!-- documemt Section -->
   <div>
     <ion-item *ngFor="let file of documents">

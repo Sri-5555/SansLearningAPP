@@ -19,9 +19,12 @@
       </ion-segment-button>
     </ion-segment>
   </div>
-
+  
+  <div class="loaders" *ngIf="assessments.length == 0">
+    <img src="/assets/Images/loader.svg">
+  </div>
  <!-- assesment section -->
- <div class="page-container">
+ <div class="page-container" *ngIf="assessments.length">
   <ion-card *ngFor="let test of assessments" class="test-card">
     <ion-card-content>
       <div class="test-name"><span class="test-content">Test Name: </span>{{test.name}}</div>
