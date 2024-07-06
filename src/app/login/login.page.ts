@@ -40,7 +40,6 @@ export class LoginPage {
   }
 
   login() {
-    // this.navCntrl.navigateForward('dashboard/home');
     if (this.loginForm.valid) {
       signInWithEmailAndPassword(
         this.auth,

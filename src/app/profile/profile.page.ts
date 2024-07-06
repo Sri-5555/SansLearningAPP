@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ToastService } from '../services/toast.service';
 import { UsersService } from '../services/user.service';
+import { Router } from '@angular/router';
+import { Auth, signOut } from '@angular/fire/auth';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -20,12 +23,10 @@ export class ProfilePage {
 
   profileForm = this.fb.group({
     name: [''],
-    dob: [''],
     gender: [''],
     mobile: [''],
     email: [''],
     phone: [],
-    address: ['']
   });
 
   subscriptions;
@@ -33,6 +34,9 @@ export class ProfilePage {
     public toast: ToastService,
     private usersService: UsersService,
     private fb: FormBuilder,
+    private router: Router,
+    private auth: Auth,
+    private navCtrl: NavController
   ) { }
 
   ngOnInit(): void {
@@ -50,8 +54,6 @@ export class ProfilePage {
     this.profileForm.controls.email.setValue('');
     this.profileForm.controls.gender.setValue('');
     this.profileForm.controls.phone.setValue('');
-    this.profileForm.controls.address.setValue('');
-    this.profileForm.controls.dob.setValue(new Date().toISOString());
     
     this.subscriptions =  this.usersService.getUserDetails(this.uid, this.idToken)
     .subscribe((user) => {
@@ -82,5 +84,14 @@ export class ProfilePage {
   ngOnDestroy() {
     this.subscriptions?.unsubscribe()
   }
-}
 
+  navigateToAboutPage() {
+    this.router.navigate(['/dashboard/help']);
+  }
+
+  logout() {
+    signOut(this.auth).then(()=>{
+      this.navCtrl.navigateRoot('login');
+    })
+  }
+}

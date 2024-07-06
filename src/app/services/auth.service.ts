@@ -29,4 +29,11 @@ export class AuthService {
     return from(this.auth.signOut());
   }
 
+  saveIdToken(token: string): void {
+    localStorage.setItem('idToken', token);
+  }
+
+  getIdToken(): string | null {
+    return localStorage.getItem('idToken');
+  }
 }

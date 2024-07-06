@@ -29,7 +29,7 @@
     <ion-card-content>
       <div class="test-name"><span class="test-content">Test Name: </span>{{test.name}}</div>
       <div class="test-questions"><span class="test-content">Questions: </span>{{test.questions.length}}</div>
-      <div class="test-time">
+      <div class="test-time" *ngIf="test.category == 'achievement-test'">
         <ion-icon name="stopwatch-outline" class="time-icon"></ion-icon>
         <span class="test-content">Time: </span>{{test.time}}</div>
       <ion-button (click)="takeAssessment(test)" expand="block">

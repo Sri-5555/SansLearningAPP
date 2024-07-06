@@ -133,3 +133,22 @@ ion-button {
 .option-text {
     margin-left: 8px;
 }
+
+
+.timer-section {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+
+    .timer {
+        width: 60px;
+        display: inline-block;
+        text-align: center;
+      }
+}
+
+.time-icon {
+    margin-right: -8px;
+    font-size: 19px;
+    vertical-align: top !important;
+}

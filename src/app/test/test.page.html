@@ -3,7 +3,11 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Assesment</ion-title>
+    <ion-title class="toolbar-title">Assesment</ion-title>
+    <div *ngIf="questionData.category == 'achievement-test'" class="timer-section"> 
+      <ion-icon name="stopwatch-outline" class="time-icon"></ion-icon>
+      <span class="timer">{{ minutes }}:{{ seconds | number: '2.0' }}</span>
+    </div>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -24,6 +28,8 @@
     </div>
   </div>
   <div class="action-buttons">
+    <ion-button class="next-button" *ngIf="!showResults && this.currentQuestionIndex != 0" (click)="goToPreviousQuestion()"
+      type="solid" expand="full">{{'Previous Question'}}</ion-button>
     <ion-button [disabled]="selectedChoice == ''" class="next-button" *ngIf="!showResults" (click)="submitAnswer()"
       type="solid" expand="full">{{ buttonText()}}</ion-button>
   </div>
