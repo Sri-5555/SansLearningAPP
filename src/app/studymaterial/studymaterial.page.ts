@@ -51,7 +51,7 @@ export class StudymaterialPage implements OnInit {
   }
 
   redirectToChapter(chapter) {
-    chapter.url = '1.pdf';
+    chapter.url = `${chapter.name}.pdf`;
     let data: NavigationExtras = {
       state: {
         chapterData: chapter

@@ -22,6 +22,7 @@ export class ProfilePage {
   uid:string ='';
   idToken:string = '';
   isLoading = false;
+  togglePassword = false;
 
   profileForm = this.fb.group({
     name: ['',[Validators.required]],

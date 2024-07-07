@@ -11,9 +11,6 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  showResults- {{showResults}}
-  isLoading- {{isLoading}}
- questions?.length - {{ questions?.length}}
   <div *ngIf="!isLoading && questions?.length" class="assesment-div">
     <!-- <div class="example-content">Profile content</div> -->
     <div *ngIf="!showResults" class="question-number">

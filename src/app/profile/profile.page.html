@@ -21,7 +21,7 @@
       </ion-button>
       <ion-label (click)="ShowDetails()">Account</ion-label>
       <p class="edit-text" *ngIf="showUserDetails" (click)="isFormDisabled = !isFormDisabled"><ion-icon name="create"
-          class="user-edit-icon"></ion-icon>EDIT</p>
+          class="user-edit-icon"></ion-icon>Edit</p>
       <ion-icon [name]="showUserDetails ? 'chevron-up-outline' : 'chevron-down-outline'"
         (click)="ShowDetails()"></ion-icon>
     </ion-item>
@@ -90,7 +90,7 @@
 
       </div>
       <div class="save-button-container">
-        <ion-button *ngIf="!isFormDisabled && profileForm.dirty && profileForm.valid" (click)="saveProfile()"
+        <ion-button expand="block" *ngIf="!isFormDisabled && profileForm.dirty && profileForm.valid" (click)="saveProfile()"
           class="save-button">UPDATE</ion-button>
       </div>
     </ng-container>
@@ -115,7 +115,8 @@
       <div class="user-form-details">
         <ion-item lines="none" color="light" class="rowStyle">
           <ion-label class="label-color form-lable" position="floating"><ion-icon name="key" class="user-icons"></ion-icon>New Password</ion-label>
-          <ion-input type="password" placeholder="password" formControlName="newPassword" class="form-input"></ion-input>
+          <ion-input [type]="togglePassword ? 'text' : 'password'" placeholder="password" formControlName="newPassword" class="form-input"></ion-input>
+          <ion-icon [name]="togglePassword ? 'eye':'eye-off'" slot="end" (click)="togglePassword = !togglePassword" class="eye-icon"></ion-icon>
         </ion-item>
 
         <ion-item lines="none" color="light" class="rowStyle">
@@ -126,7 +127,7 @@
         </ion-item>
       </div>
       <div class="save-button-container">
-        <ion-button [disabled]="!(passwordForm.dirty && passwordForm.valid)" (click)="changePassword()"
+        <ion-button expand="block" [disabled]="!(passwordForm.dirty && passwordForm.valid)" (click)="changePassword()"
           class="save-button">Change Password</ion-button>
       </div>
     </ng-container>

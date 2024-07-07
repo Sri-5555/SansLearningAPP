@@ -81,7 +81,6 @@ export class TestPage implements OnInit {
       .getAchievementTestData().subscribe((data) => {
         this.questions = data;
         this.currentQuestion = this.questions[0];
-        this.questions.splice(0,40);
         setTimeout(() => {
           this.isLoading = false;
         }, 1000);
@@ -133,9 +132,9 @@ export class TestPage implements OnInit {
       } else {
         this.showResults = true;
         if (this.questionData.category == 'achievement') {
+          this.timerSubscription.unsubscribe();
           this.submitAnswers();
         }
-        this.timerSubscription.unsubscribe();
         this.scrollToTop();
       }
     }

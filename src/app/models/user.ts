@@ -10,4 +10,5 @@ export interface ProfileUser {
   phone?: string;
   photoURL?: string;
   university?: string;
+  category?: string;
 }

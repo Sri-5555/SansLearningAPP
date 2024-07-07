@@ -32,6 +32,15 @@
       </ion-item>
 
       <ion-item lines="none" color="light" class="rowStyle">
+        <ion-select class="form-input" placeholder="Category" formControlName="category">
+          <ion-select-option value="General">General</ion-select-option>
+          <ion-select-option value="OBC">OBC</ion-select-option>
+          <ion-select-option value="SC">SC</ion-select-option>
+          <ion-select-option value="ST">ST</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none" color="light" class="rowStyle">
         <ion-input type="text" maxlength="10" placeholder="Mobile" formControlName="mobile"></ion-input>
       </ion-item>
       <div class="rowStyle" *ngIf="signupForm.controls?.mobile.touched && signupForm.controls?.mobile.invalid">

@@ -47,6 +47,7 @@ export class SignupPage{
       password: ['', [Validators.required]],
       confirmPassword: ['', Validators.required],
       university: ['', Validators.required],
+      category: ['', Validators.required],
     }, { validators: passwordsMatchValidator() });
   }
 
@@ -78,18 +79,22 @@ export class SignupPage{
     return this.signupForm.get('university');
   }
 
+  get category() {
+    return this.signupForm.get('category');
+  }
+
 
   signup() {
     if (this.signupForm.valid) {
       console.log("signupForm",this.signupForm,this.signupForm.value);
-      const { name, email, password, gender, mobile, university } = this.signupForm.value;     
+      const { name, email, password, gender, mobile, university, category } = this.signupForm.value;     
       createUserWithEmailAndPassword(
         this.auth,
         email,
         password,
       ).then((res: any) => {
         console.log(res)
-        this.usersService.addUser({ uid: res.user.uid, email, name, gender, mobile, university }).subscribe(res => {
+        this.usersService.addUser({ uid: res.user.uid, email, name, gender, mobile, university, category }).subscribe(res => {
           this.toast.sucessToast('User created successfully');
         });
 
