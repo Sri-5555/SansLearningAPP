@@ -3,50 +3,59 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title class="toolbar-title">Assesment</ion-title>
-    <div *ngIf="questionData.category == 'achievement-test'" class="timer-section"> 
+    <ion-title class="toolbar-title">{{this.questionData.category | uppercase}} TEST</ion-title>
+    <div *ngIf="questionData.category == 'achievement'" class="timer-section">
       <ion-icon name="stopwatch-outline" class="time-icon"></ion-icon>
       <span class="timer">{{ minutes }}:{{ seconds | number: '2.0' }}</span>
     </div>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <!-- <div class="example-content">Profile content</div> -->
-  <div *ngIf="!showResults" class="question-number">
-    {{currentQuestionIndex +1}}/{{questions.length}} Questions
-  </div>
-  <div class="question-container" *ngIf="!showResults">
-    <div class="question">
-      <!-- {{currentQuestionIndex +1}}. -->
-      {{ currentQuestion.question }}
+  showResults- {{showResults}}
+  isLoading- {{isLoading}}
+ questions?.length - {{ questions?.length}}
+  <div *ngIf="!isLoading && questions?.length" class="assesment-div">
+    <!-- <div class="example-content">Profile content</div> -->
+    <div *ngIf="!showResults" class="question-number">
+      {{currentQuestionIndex +1}}/{{questions.length}} Questions
     </div>
-    <div class="option-container">
-      <div class="option" *ngFor="let choice of currentQuestion.choices">
-        <input type="radio" name="answer" [(ngModel)]="selectedChoice" [value]="choice">
-        <span class="option-text" (click)="optionSelected(choice)">{{ choice }}</span>
+    <div class="question-container" *ngIf="!showResults">
+      <div class="question">
+        <!-- {{currentQuestionIndex +1}}. -->
+        {{ currentQuestion.question }}
+      </div>
+      <div class="option-container">
+        <div class="option" *ngFor="let choice of currentQuestion?.choices">
+          <input type="radio" name="answer" [(ngModel)]="selectedChoice" [value]="choice">
+          <span class="option-text" (click)="optionSelected(choice)">{{ choice }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="action-buttons">
+      <ion-button class="next-button" *ngIf="!showResults && this.currentQuestionIndex != 0"
+        (click)="goToPreviousQuestion()" type="solid" expand="full">{{'Previous Question'}}</ion-button>
+      <ion-button [disabled]="selectedChoice == ''" class="next-button" *ngIf="!showResults"
+        (click)="submitAnswer('next')" type="solid" expand="full">{{ buttonText()}}</ion-button>
+    </div>
+    <div class="result-container" *ngIf="showResults">
+      <h2>Result</h2>
+      <ion-card>
+        <ion-card-content class="result-card">
+          <b>{{getCorrectAnswerNumber()}}</b> of <b>{{questions.length}}</b> questions answered correctly
+        </ion-card-content>
+      </ion-card>
+      <div class="result-question" *ngFor="let result of results;let i=index">
+        <div><span class="result-number">{{i+1}}.</span> {{ result.question }}</div>
+        <div><span class="bold-text">Your Answer : </span> <span
+            [ngClass]="{'green-color': result.selectedChoice == result.correctChoice,'red-color': result.selectedChoice != result.correctChoice}">{{
+            result.selectedChoice }}</span> </div>
+        <div *ngIf="result.selectedChoice != result.correctChoice"><span class="bold-text">Correct Answer :</span> {{
+          result.correctChoice }}</div>
       </div>
     </div>
   </div>
-  <div class="action-buttons">
-    <ion-button class="next-button" *ngIf="!showResults && this.currentQuestionIndex != 0" (click)="goToPreviousQuestion()"
-      type="solid" expand="full">{{'Previous Question'}}</ion-button>
-    <ion-button [disabled]="selectedChoice == ''" class="next-button" *ngIf="!showResults" (click)="submitAnswer()"
-      type="solid" expand="full">{{ buttonText()}}</ion-button>
-  </div>
-  <div class="result-container" *ngIf="showResults">
-    <h2>Result</h2>
-    <ion-card>
-      <ion-card-content class="result-card">
-        <b>{{getCorrectAnswerNumber()}}</b> of <b>{{questions.length}}</b> questions answered correctly
-      </ion-card-content>
-    </ion-card>
-    <div class="result-question" *ngFor="let result of results;let i=index">
-      <div><span class="result-number">{{i+1}}.</span> {{ result.question }}</div>
-      <div><span class="bold-text">Your Answer : </span> <span
-          [ngClass]="{'green-color': result.selectedChoice == result.correctChoice,'red-color': result.selectedChoice != result.correctChoice}">{{
-          result.selectedChoice }}</span> </div>
-      <div *ngIf="result.selectedChoice != result.correctChoice"><span class="bold-text">Correct Answer :</span> {{
-        result.correctChoice }}</div>
-    </div>
+
+  <div class="loaders" *ngIf="isLoading">
+    <img src="/assets/Images/loader.svg">
   </div>
 </ion-content>

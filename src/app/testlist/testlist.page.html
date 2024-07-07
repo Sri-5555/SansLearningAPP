@@ -28,10 +28,10 @@
   <ion-card *ngFor="let test of assessments" class="test-card">
     <ion-card-content>
       <div class="test-name"><span class="test-content">Test Name: </span>{{test.name}}</div>
-      <div class="test-questions"><span class="test-content">Questions: </span>{{test.questions.length}}</div>
-      <div class="test-time" *ngIf="test.category == 'achievement-test'">
+      <div class="test-questions"><span class="test-content">Questions: </span>{{50}}</div>
+      <div class="test-time" *ngIf="test.category == 'achievement'">
         <ion-icon name="stopwatch-outline" class="time-icon"></ion-icon>
-        <span class="test-content">Time: </span>{{test.time}}</div>
+        <span class="test-content">Time: </span>1 hr</div>
       <ion-button (click)="takeAssessment(test)" expand="block">
         Take Test
         <ion-icon slot="end" name="arrow-forward-circle-sharp"></ion-icon>

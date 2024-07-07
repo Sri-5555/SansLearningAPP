@@ -24,7 +24,7 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
-
+@import url('https://fonts.googleapis.com/css2?family=Laila:wght@300;400;500;600;700&display=swap');
 
 * {
     font-family: var(--font-family-base) !important;
@@ -73,3 +73,8 @@ vg-scrub-bar .current-time-bar {
     top: 45%;
 }
 
+.laila-medium {
+    font-family: "Laila", serif;
+    font-weight: 500;
+    font-style: normal;
+}

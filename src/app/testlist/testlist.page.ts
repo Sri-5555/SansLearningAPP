@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-testlist',
@@ -10,7 +9,10 @@ import { map } from 'rxjs/operators';
 })
 export class TestlistPage implements OnInit {
   segment = 'testList';
-  assessments: any = [];
+  assessments: any = [
+    { category: 'practice', marks: 50, name: 'Practice Test', questions: [] },
+    { category: 'achievement', marks: 50, name: 'Achievement Test', questions: [], time: '1 hr' }
+  ];
 
   constructor(private router: Router,
     public dataService: DataService,
@@ -19,7 +21,6 @@ export class TestlistPage implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.segment = 'testList';
-      this.getAssessmentsData();
     }, 0);
   }
 
@@ -30,27 +31,6 @@ export class TestlistPage implements OnInit {
 
   ionViewWillEnter() {
     this.segment = 'testList';
-  }
-
-  getAssessmentsData() {
-    this.dataService
-      .getAssessmentsData()
-      .pipe(
-        map((response: any) => {
-          const chapters = [];
-          for (const key in response) {
-            if (response.hasOwnProperty(key)) {
-              chapters.push({ ...response[key], id: key });
-            }
-          }
-          return chapters;
-        })
-      )
-      .subscribe((data) => {
-        this.assessments = data;
-      }, err => {
-        console.log(err);
-      });
   }
 
   takeAssessment(test) {

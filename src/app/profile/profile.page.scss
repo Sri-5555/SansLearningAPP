@@ -80,7 +80,7 @@ ion-content {
 }
 
 .form-input {
-    color: #000;
+    color: #000 !important;
     font-weight: 400;
     --placeholder-color: #999;
     --padding-start: 25px; 
@@ -124,4 +124,4 @@ ion-content {
 .disable-pointer-events {
     pointer-events: none;
     color: grey !important;
-  }
+}

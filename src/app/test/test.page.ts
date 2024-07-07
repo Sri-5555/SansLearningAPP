@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IonContent } from '@ionic/angular';
 import { Subscription, interval } from 'rxjs';
+import { DataService } from '../services/data.service';
+import { UsersService } from '../services/user.service';
+import { ToastService } from '../services/toast.service';
 @Component({
   selector: 'app-test',
   templateUrl: './test.page.html',
@@ -10,9 +13,9 @@ import { Subscription, interval } from 'rxjs';
 export class TestPage implements OnInit {
   @ViewChild(IonContent) content: IonContent;
   
-  questions: any[] = [];
+  questions: any;
   currentQuestionIndex = 0;
-  currentQuestion = this.questions[0];
+  currentQuestion;
   selectedChoice: string = '';
   showResults = false;
   results: any[] = [];
@@ -22,20 +25,70 @@ export class TestPage implements OnInit {
   seconds: number = 0;
   timerSubscription: Subscription;
   questionData: any;
+  isLoading:boolean = false;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,public dataService: DataService,
+    private usersService: UsersService,
+    public toast: ToastService
+  ) { }
 
   ngOnInit() {
+    this.getQuestions();
+  }
+
+  ionViewWillEnter() {
+    this.getQuestions();
+  }
+
+  getQuestions() {
     this.showResults = false;
     this.route.paramMap.subscribe(params => {
       this.questionData = history.state.testData;
-      this.questions = this.questionData.questions;
-      this.currentQuestion = this.questions[0];
-      this.totalTime = this.convertTimeStringToSeconds(this.questionData.time);
-      if(this.questionData.category == 'achievement-test'){
+      if (this.questionData.category == 'achievement') {
+        setTimeout(() => {
+          this.getAchievementTestData();
+        }, 0);
+      } else {
+        setTimeout(() => {
+          this.getPracticeTesttData();
+        }, 0);
+      }
+      this.totalTime = 3600;
+      if (this.questionData.category == 'achievement') {
         this.startTimer();
       }
     });
+  }
+
+  getPracticeTesttData() {
+    this.isLoading = true;
+    this.dataService
+      .getPracticeTesttData().subscribe((data) => {
+        this.questions = data;
+        this.currentQuestion = this.questions[0];
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1000);
+      }, err => {
+        console.log(err);
+        this.isLoading = false;
+      });
+  }
+
+  getAchievementTestData() {
+    this.isLoading = true;
+    this.dataService
+      .getAchievementTestData().subscribe((data) => {
+        this.questions = data;
+        this.currentQuestion = this.questions[0];
+        this.questions.splice(0,40);
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1000);
+      }, err => {
+        console.log(err);
+        this.isLoading = false;
+      });
   }
 
   startTimer() {
@@ -46,30 +99,19 @@ export class TestPage implements OnInit {
       console.log("time", this.minutes, this.seconds);
       if (this.totalTime <= 0) {
         this.timerSubscription.unsubscribe();
-        this.submitAnswer();
+        this.submitAnswer('submit');
       }
     });
   }
 
-  convertTimeStringToSeconds(timeString) {
-    const timeParts = timeString.split(' ');
-    let totalSeconds = 0;
-    const value = parseInt(timeParts[0]);
-    const unit = timeParts[1];
-    if (unit === 'm') {
-      totalSeconds = value * 60; // Convert minutes to seconds
-    } else if (unit === 'h') {
-      totalSeconds = value * 3600; // Convert hours to seconds
-    }
-    return totalSeconds;
-  }
-
-  submitAnswer() {
+  submitAnswer(from) {
     if (this.selectedChoice != '') {
       const result = {
+        id: this.currentQuestion.id,
         question: this.currentQuestion.question,
         selectedChoice: this.selectedChoice,
-        correctChoice: this.currentQuestion.correctChoice
+        correctChoice: this.currentQuestion.correctChoice,
+        isAnsCorrect: this.selectedChoice == this.currentQuestion.correctChoice
       };
       // Update the answer if it already exists, otherwise push it to the results array
       const existingResultIndex = this.results.findIndex(r => r.question === this.currentQuestion.question);
@@ -90,10 +132,41 @@ export class TestPage implements OnInit {
         }
       } else {
         this.showResults = true;
+        if (this.questionData.category == 'achievement') {
+          this.submitAnswers();
+        }
         this.timerSubscription.unsubscribe();
         this.scrollToTop();
       }
     }
+    if (from == 'submit') {
+      this.showResults = true;
+      this.timerSubscription.unsubscribe();
+      this.scrollToTop();
+      if (this.questionData.category == 'achievement') {
+        this.submitAnswers();
+      }
+      console.log("result",this.results);
+    }
+  }
+
+  submitAnswers() {
+    let uid = localStorage.getItem('uid');
+    let idToken = localStorage.getItem('idToken');
+    this.usersService.getUserDetails(uid,idToken)
+      .subscribe((user: any) => {
+        user.achievementTestResult = this.results;
+        this.usersService
+        .updateUserDetails(uid,idToken,user)
+        .subscribe(res => {
+          this.toast.sucessToast('Test Submitted successfully');
+        }, err => {
+          this.toast.sucessToast('Test Submitted failed');
+        });
+        this.isLoading = false;
+      }, err => {
+        console.log(err);
+      });
   }
 
   goToPreviousQuestion() {
@@ -118,13 +191,7 @@ export class TestPage implements OnInit {
   }
 
   getCorrectAnswerNumber() {
-    let correctAnsArr = 0;
-    this.results.forEach(question => {
-      if (question.selectedChoice == question.correctChoice) {
-        correctAnsArr++;
-      }
-    });
-    return correctAnsArr;
+    return this.results.filter(qn => qn.isAnsCorrect).length;
   }
 
   scrollToTop() {

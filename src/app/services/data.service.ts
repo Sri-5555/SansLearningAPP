@@ -31,4 +31,12 @@ export class DataService {
     return this.http.get(`https://sanslearn-44246-default-rtdb.firebaseio.com/assessments/.json?auth=${this.idToken}`);
   }
 
+  getPracticeTesttData() {
+    return this.http.get(`https://sanslearn-44246-default-rtdb.firebaseio.com/practicetest/.json?auth=${this.idToken}`);
+  }
+
+  getAchievementTestData() {
+    return this.http.get(`https://sanslearn-44246-default-rtdb.firebaseio.com/actest/.json?auth=${this.idToken}`);
+  }
+
 }

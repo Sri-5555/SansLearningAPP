@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ToastService } from '../services/toast.service';
 import { UsersService } from '../services/user.service';
 import { Router } from '@angular/router';
-import { Auth, signOut } from '@angular/fire/auth';
+import { Auth, signOut, updatePassword } from '@angular/fire/auth';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -17,17 +17,22 @@ export class ProfilePage {
   userdetails: any = [];
 
   showUserDetails: boolean = false;
+  showPasswordSection: boolean = false;
   isFormDisabled: boolean = true;
   uid:string ='';
   idToken:string = '';
+  isLoading = false;
 
   profileForm = this.fb.group({
-    name: [''],
-    gender: [''],
-    mobile: [''],
-    email: [''],
-    phone: [],
+    name: ['',[Validators.required]],
+    gender:['',[Validators.required]],
+    mobile:['',[Validators.required, mobileNumberValidator()]],
+    email: ['',[Validators.required,Validators.email]],
+    university: ['',[Validators.required]],
+    category: ['',[Validators.required]],
   });
+
+  passwordForm: FormGroup;
 
   subscriptions;
   constructor(
@@ -46,19 +51,27 @@ export class ProfilePage {
       this.getProfileDetails();
     }, 0);
     // this.profileForm.disable();
+
+    this.passwordForm = this.fb.group({
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      cPassword: ['', [Validators.required, Validators.minLength(6)]]
+    },{ validators: passwordsMatchValidator() });
   }
 
   getProfileDetails() {
+    this.isLoading = true;
     this.profileForm.controls.name.setValue('');
     this.profileForm.controls.mobile.setValue('');
     this.profileForm.controls.email.setValue('');
     this.profileForm.controls.gender.setValue('');
-    this.profileForm.controls.phone.setValue('');
+    this.profileForm.controls.university.setValue('');
+    this.profileForm.controls.category.setValue('');
     
     this.subscriptions =  this.usersService.getUserDetails(this.uid, this.idToken)
     .subscribe((user) => {
       this.userdetails = user;
       this.profileForm.patchValue({ ...this.userdetails });
+      this.isLoading = false;
     },err=>{
         console.log(err);
     });
@@ -86,7 +99,7 @@ export class ProfilePage {
   }
 
   navigateToAboutPage() {
-    this.router.navigate(['/dashboard/help']);
+    this.router.navigate(['/dashboard/about']);
   }
 
   logout() {
@@ -94,4 +107,58 @@ export class ProfilePage {
       this.navCtrl.navigateRoot('login');
     })
   }
+
+  changePassword() {
+    if (this.passwordForm.valid) {
+      const { newPassword, cPassword } = this.passwordForm.value;
+      if (newPassword === cPassword) {
+        try {
+          const user = this.auth.currentUser;
+          if (user) {
+            updatePassword(user, newPassword).then(data=> {
+              this.toast.sucessToast('Password changed successfully');
+              this.navCtrl.navigateForward('login');
+            })
+            .catch(err => {
+              console.log(` failed ${err}`);
+              this.toast.warningToast(err.error.message);
+            });
+          } else {
+            this.toast.warningToast('No user is currently signed in');
+          }
+        } catch (error: any) {
+          if (error.code === 'auth/requires-recent-login') {
+            this.toast.warningToast('Please log in again to change your password');
+          } else {
+            this.toast.warningToast(`Error: ${error.message}`);
+          }
+        }
+      } else {
+        this.toast.warningToast('Passwords do not match');
+      }
+    } else {
+      this.toast.warningToast('Please enter valid password');
+    }
+  }  
+}
+
+export function passwordsMatchValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+
+    if (password && confirmPassword && password !== confirmPassword) {
+      return { passwordsDontMatch: true };
+    } else {
+      return null;
+    }
+  };
+}
+
+export function mobileNumberValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const mobileNumberRegex = /^[0-9]{10}$/;
+    const isValid = mobileNumberRegex.test(control.value);
+    return isValid ? null : { invalidMobileNumber: { value: control.value } };
+  };
 }

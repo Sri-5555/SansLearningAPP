@@ -10,9 +10,6 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 import { ToastService } from '../services/toast.service';
 import { UsersService } from '../services/user.service';
 import { Component } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',

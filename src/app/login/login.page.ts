@@ -50,12 +50,14 @@ export class LoginPage {
           localStorage.setItem('uid',res.user.uid);
           res.user?.getIdToken().then(idToken => {
             localStorage.setItem('idToken',idToken);
+            setTimeout(() => {
+              this.toast.sucessToast("Login successfull");
+              this.navCntrl.navigateForward('dashboard/studymaterial');
+            }, 10);
           }).catch(err => {
             console.error("Failed to get ID token:", err);
             this.toast.warningToast("Failed to get ID token");
           });
-          this.toast.sucessToast("Login successfull");
-          this.navCntrl.navigateForward('dashboard/studymaterial');
         } else {
           this.toast.warningToast("Please verify email.");
           sendEmailVerification(res.user,
