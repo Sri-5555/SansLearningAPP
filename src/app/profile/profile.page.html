@@ -1,10 +1,14 @@
 <ion-content padding [formGroup]="profileForm">
   <div *ngIf="!isLoading">
-    <div class="profile-header">Profile</div>
+    <ion-header>
+      <ion-toolbar color="primary" class="header">
+        <ion-title>Profile</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
     <ion-list>
       <ion-item>
-        <ion-thumbnail slot="start">
+        <ion-thumbnail slot="start" class="profile-image">
           <ion-img src="../../assets/Images/profileIcon.png"></ion-img>
         </ion-thumbnail>
         <ion-label>
@@ -16,10 +20,10 @@
     </ion-list>
 
     <ion-item>
-      <ion-button color="profileColor" slot="start">
-        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+      <ion-button color="profileColor" slot="start" class="profile-icon-button">
+        <ion-icon slot="icon-only" name="person-circle-outline" class="profile-icons"></ion-icon>
       </ion-button>
-      <ion-label (click)="ShowDetails()">Account</ion-label>
+      <ion-label (click)="ShowDetails()" class="about-items-label">Account</ion-label>
       <p class="edit-text" *ngIf="showUserDetails" (click)="isFormDisabled = !isFormDisabled"><ion-icon name="create"
           class="user-edit-icon"></ion-icon>Edit</p>
       <ion-icon [name]="showUserDetails ? 'chevron-up-outline' : 'chevron-down-outline'"
@@ -96,17 +100,17 @@
     </ng-container>
 
     <ion-item>
-      <ion-button color="about" slot="start">
-        <ion-icon slot="icon-only" name="alert-circle-outline"></ion-icon>
+      <ion-button color="about" slot="start" class="profile-icon-button">
+        <ion-icon slot="icon-only" name="alert-circle-outline" class="profile-icons"></ion-icon>
       </ion-button>
-      <ion-label (click)="navigateToAboutPage()">About</ion-label>
+      <ion-label (click)="navigateToAboutPage()" class="about-items-label">About</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-button slot="start">
-        <ion-icon slot="icon-only" name="lock-closed-outline"></ion-icon>
+      <ion-button slot="start" class="profile-icon-button">
+        <ion-icon slot="icon-only" name="lock-closed-outline" class="profile-icons"></ion-icon>
       </ion-button>
-      <ion-label (click)="showPasswordSection = !showPasswordSection">Change Password</ion-label>
+      <ion-label (click)="showPasswordSection = !showPasswordSection" class="about-items-label">Change Password</ion-label>
       <ion-icon [name]="showPasswordSection ? 'chevron-up-outline' : 'chevron-down-outline'"
       (click)="showPasswordSection = !showPasswordSection"></ion-icon>
     </ion-item>
@@ -115,15 +119,16 @@
       <div class="user-form-details">
         <ion-item lines="none" color="light" class="rowStyle">
           <ion-label class="label-color form-lable" position="floating"><ion-icon name="key" class="user-icons"></ion-icon>New Password</ion-label>
-          <ion-input [type]="togglePassword ? 'text' : 'password'" placeholder="password" formControlName="newPassword" class="form-input"></ion-input>
-          <ion-icon [name]="togglePassword ? 'eye':'eye-off'" slot="end" (click)="togglePassword = !togglePassword" class="eye-icon"></ion-icon>
+          <ion-input [type]="toggleNewPassword ? 'text' : 'password'" placeholder="password" formControlName="newPassword" class="form-input"></ion-input>
+          <ion-icon *ngIf="newPassword?.value" [name]="toggleNewPassword ? 'eye':'eye-off'" slot="end" (click)="toggleNewPassword = !toggleNewPassword" class="eye-icon"></ion-icon>
         </ion-item>
 
         <ion-item lines="none" color="light" class="rowStyle">
           <ion-label class="label-color form-lable" position="floating"><ion-icon name="key"
               class="user-icons"></ion-icon>Confirm Password</ion-label>
-          <ion-input type="password" placeholder="password" formControlName="cPassword" class="form-input">
+          <ion-input [type]="toggleCpassword ? 'text' : 'password'" placeholder="password" formControlName="cPassword" class="form-input">
           </ion-input>
+          <ion-icon *ngIf="CPassword?.value" [name]="toggleCpassword ? 'eye':'eye-off'" slot="end" (click)="toggleCpassword = !toggleCpassword" class="eye-icon"></ion-icon>
         </ion-item>
       </div>
       <div class="save-button-container">
@@ -133,10 +138,10 @@
     </ng-container>
 
     <ion-item>
-      <ion-button color="logout" slot="start">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      <ion-button color="logout" slot="start" class="profile-icon-button">
+        <ion-icon slot="icon-only" name="log-out-outline" class="profile-icons"></ion-icon>
       </ion-button>
-      <ion-label (click)="logout()">Logout</ion-label>
+      <ion-label (click)="logout()" class="about-items-label">Logout</ion-label>
     </ion-item>
   </div>
   <div class="loaders" *ngIf="isLoading">

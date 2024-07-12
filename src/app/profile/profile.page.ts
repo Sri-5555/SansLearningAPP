@@ -22,7 +22,8 @@ export class ProfilePage {
   uid:string ='';
   idToken:string = '';
   isLoading = false;
-  togglePassword = false;
+  toggleCpassword = false;
+  toggleNewPassword = false;
 
   profileForm = this.fb.group({
     name: ['',[Validators.required]],
@@ -140,7 +141,15 @@ export class ProfilePage {
     } else {
       this.toast.warningToast('Please enter valid password');
     }
-  }  
+  }
+
+  get newPassword() {
+    return this.passwordForm.get('newPassword');
+  }
+
+  get CPassword() {
+    return this.passwordForm.get('cPassword');
+  }
 }
 
 export function passwordsMatchValidator(): ValidatorFn {

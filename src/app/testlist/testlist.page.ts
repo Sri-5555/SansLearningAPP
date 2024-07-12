@@ -8,8 +8,9 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./testlist.page.scss'],
 })
 export class TestlistPage implements OnInit {
-  segment = 'testList';
-  assessments: any = [
+  segment:any;
+  assessments: any;
+  assessmentsTypes: any = [
     { category: 'practice', marks: 50, name: 'Practice Test', questions: [] },
     { category: 'achievement', marks: 50, name: 'Achievement Test', questions: [], time: '1 hr' }
   ];
@@ -19,9 +20,8 @@ export class TestlistPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.segment = 'testList';
-    }, 0);
+    this.segment = this.router.url.split('/').pop();
+    this.assessments = this.segment == "PracticeTest" ? this.assessmentsTypes[0] : this.assessmentsTypes[1];
   }
 
   segmentChanged(event) {
@@ -30,7 +30,8 @@ export class TestlistPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.segment = 'testList';
+    this.segment = this.router.url.split('/').pop();
+    this.assessments = this.segment == "PracticeTest" ? [this.assessmentsTypes[0]] : [this.assessmentsTypes[1]];
   }
 
   takeAssessment(test) {

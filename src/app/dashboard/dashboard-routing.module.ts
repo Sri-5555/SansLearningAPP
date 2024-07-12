@@ -21,7 +21,11 @@ const routes: Routes = [
         loadChildren: () => import('../document/document.module').then((m) => m.DocumentPageModule),
       },
       {
-        path: 'testList',
+        path: 'PracticeTest',
+        loadChildren: () => import('../testlist/testlist.module').then((m) => m.TestlistPageModule),
+      },
+      {
+        path: 'AchievementTest',
         loadChildren: () => import('../testlist/testlist.module').then((m) => m.TestlistPageModule),
       },
       {

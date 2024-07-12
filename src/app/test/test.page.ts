@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonContent } from '@ionic/angular';
 import { Subscription, interval } from 'rxjs';
 import { DataService } from '../services/data.service';
@@ -29,7 +29,8 @@ export class TestPage implements OnInit {
 
   constructor(private route: ActivatedRoute,public dataService: DataService,
     private usersService: UsersService,
-    public toast: ToastService
+    public toast: ToastService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -91,7 +92,10 @@ export class TestPage implements OnInit {
   }
 
   startTimer() {
+    this.stopTimer();
     this.timerSubscription = interval(1000).subscribe(() => {
+     if(this.router.url.split('/').pop() == 'test')
+     {
       this.totalTime--;
       this.minutes = Math.floor(this.totalTime / 60);
       this.seconds = this.totalTime % 60;
@@ -100,6 +104,9 @@ export class TestPage implements OnInit {
         this.timerSubscription.unsubscribe();
         this.submitAnswer('submit');
       }
+     } else {
+      this.stopTimer();
+     } 
     });
   }
 

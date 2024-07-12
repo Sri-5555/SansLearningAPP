@@ -20,14 +20,15 @@ ion-content {
 }
 
 .profile-header {
-    font-size: 25px;
+    font-size: 22px;
     font-weight: bold;
-    margin: 15px;
+    margin: 15px 15px 0px 15px;
+    color: var(--ion-color-primary);
 }
 
 .profile-nameText {
     font-weight: bold;
-    font-size: 25px;
+    font-size: 20px;
     color: #000;
 }
 
@@ -132,5 +133,27 @@ ion-content {
     cursor: pointer;
     color: var(--ion-color-primary);
     position: relative;
-    top: 12px;
+    top: 20px;
+    font-size: 20px;
+}
+
+.profile-image {
+    height: 45px;
+    width: 45px;
+}
+
+.about-items-label {
+    font-size: 15px !important;
+}
+
+.profile-icons {
+    font-size: 18px !important;
+}
+
+.profile-icon-button {
+    margin-right: 20px !important;
+}
+
+.header {
+    --ion-color-base: #2e79ba !important;
 }
