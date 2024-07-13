@@ -4,19 +4,19 @@
     </ion-row>
   
     <ion-item lines="none" color="primary" class="text1">
-      <ion-label>SansLearn1</ion-label>
+      <ion-label>शिक्षामनोविज्ञानम्</ion-label>
     </ion-item>
     
     <div>
       <ion-item lines="none" color="light" class="rowStyle">
-        <ion-input type="text" placeholder="Name" formControlName="name"></ion-input>
+        <ion-input type="text" placeholder="Name" formControlName="name" class="signup-input"></ion-input>
       </ion-item>
       <div class="rowStyle" *ngIf="signupForm.controls?.name.touched && signupForm.controls?.name.invalid">
         <ion-text class="error-message">Enter valid name</ion-text>
       </div>
 
       <ion-item lines="none" color="light" class="rowStyle">
-        <ion-select placeholder="Gender" formControlName="gender">
+        <ion-select placeholder="Gender" formControlName="gender" class="signup-input">
           <ion-select-option value="male">Male</ion-select-option>
           <ion-select-option value="female">Female</ion-select-option>
           <ion-select-option value="others">Others</ion-select-option>
@@ -24,7 +24,7 @@
       </ion-item>
 
       <ion-item lines="none" color="light" class="rowStyle">
-        <ion-select placeholder="university" formControlName="university">
+        <ion-select placeholder="university" formControlName="university" class="signup-input">
           <ion-select-option value="NSU">राष्ट्रियसंस्कृतविश्वविद्यालयः तिरुपतिः (NSU,  TIRUPATI)</ion-select-option>
           <ion-select-option value="CSU">केंद्रियसंस्कृतविश्वविद्यालयः लखनऊ परिशरः (CSU,  Lucknow)</ion-select-option>
           <ion-select-option value="SLBSNSU">श्री लालबहादुर शास्त्री  राष्ट्रियसंस्कृतविश्वविद्यालयः ( SLBSNSU, New Delhi)</ion-select-option>
@@ -32,7 +32,7 @@
       </ion-item>
 
       <ion-item lines="none" color="light" class="rowStyle">
-        <ion-select class="form-input" placeholder="Category" formControlName="category">
+        <ion-select class="form-input" placeholder="Category" formControlName="category" class="signup-input">
           <ion-select-option value="General">General</ion-select-option>
           <ion-select-option value="OBC">OBC</ion-select-option>
           <ion-select-option value="SC">SC</ion-select-option>
@@ -41,27 +41,27 @@
       </ion-item>
 
       <ion-item lines="none" color="light" class="rowStyle">
-        <ion-input type="text" maxlength="10" placeholder="Mobile" formControlName="mobile"></ion-input>
+        <ion-input type="text" maxlength="10" placeholder="Mobile" formControlName="mobile" class="signup-input"></ion-input>
       </ion-item>
       <div class="rowStyle" *ngIf="signupForm.controls?.mobile.touched && signupForm.controls?.mobile.invalid">
         <ion-text class="error-message">Enter valid mobile number</ion-text>
       </div>
 
       <ion-item lines="none" color="light" class="rowStyle">
-        <ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
+        <ion-input type="text" placeholder="Email" formControlName="email" class="signup-input"></ion-input>
       </ion-item>
 
       <div class="rowStyle" *ngIf="signupForm.controls?.email?.touched && signupForm.controls?.email?.invalid">
         <ion-text class="error-message">Enter valid mail</ion-text>
       </div>
       <ion-item lines="none" color="light" class="rowStyle">
-        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+        <ion-input type="password" placeholder="Password" formControlName="password" class="signup-input"></ion-input>
       </ion-item>
       <div class="rowStyle" *ngIf="signupForm.controls?.password?.touched && signupForm.controls?.password?.invalid">
         <ion-text class="error-message">Enter valid password</ion-text>
       </div>
       <ion-item lines="none" color="light" class="rowStyle">
-        <ion-input type="password" placeholder="Confirm Password" formControlName="confirmPassword"></ion-input>
+        <ion-input type="password" placeholder="Confirm Password" formControlName="confirmPassword" class="signup-input"></ion-input>
       </ion-item>
       <div class="rowStyle" *ngIf="signupForm.controls?.confirmPassword?.touched && signupForm.controls?.confirmPassword?.errors?.required">
         <ion-text class="error-message">Confirm Password is required</ion-text>

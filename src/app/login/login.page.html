@@ -16,7 +16,7 @@
   </ion-row>
 
   <ion-item lines="none" color="primary" class="text1">
-    <ion-label>SansLearn</ion-label>
+    <ion-label>शिक्षामनोविज्ञानम्</ion-label>
   </ion-item>
 
 
@@ -26,13 +26,13 @@
  
     <div>
       <ion-item lines="none" color="light" class="rowStyle">
-        <ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
+        <ion-input type="text" placeholder="Email" formControlName="email" class="login-input"></ion-input>
       </ion-item>
       <div class="rowStyle" *ngIf="loginForm.controls?.email.touched && loginForm.controls?.email.invalid">
         <ion-text class="error-message">Enter valid mail</ion-text>
       </div>
       <ion-item lines="none" color="light" class="rowStyle">
-        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+        <ion-input type="password" placeholder="Password" formControlName="password" class="login-input"></ion-input>
       </ion-item>
       <div class="rowStyle" *ngIf="loginForm.controls?.password.touched && loginForm.controls?.password.invalid">
         <ion-text class="error-message">Enter valid password</ion-text>
