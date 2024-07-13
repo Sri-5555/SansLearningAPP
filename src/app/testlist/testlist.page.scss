@@ -163,3 +163,18 @@ ion-segment-button.segment-button-checked{
 .test-content {
   font-weight: 700;
 }
+
+.test-completed {
+  font-weight: 700;
+  text-align: center;
+  color: var(--ion-color-primary);
+  margin-top: -5px;
+  .icon {
+    font-size: 12px !important;
+    margin-left: 5px;
+  }
+}
+
+.card-color-green {
+  background-color: rgb(201 234 201) !important;
+}

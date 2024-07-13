@@ -28,15 +28,22 @@
   </div>
  <!-- assesment section -->
  <div class="page-container" *ngIf="assessments.length">
-  <ion-card *ngFor="let test of assessments" class="test-card">
+  <ion-card *ngFor="let test of assessments" class="test-card" [ngClass]="{'card-color-green': segment === 'AchievementTest' && disableTest}">
     <ion-card-content>
       <div class="test-name"><span class="test-content">Test Name: </span>{{test.name}}</div>
       <div class="test-questions"><span class="test-content">Questions: </span>{{50}}</div>
       <div class="test-time" *ngIf="test.category == 'achievement'">
         <ion-icon name="stopwatch-outline" class="time-icon"></ion-icon>
         <span class="test-content">Time: </span>1 hr</div>
-      <ion-button (click)="takeAssessment(test)" expand="block">
+        <div class="test-completed" *ngIf="segment == 'AchievementTest' && disableTest">Test completed
+          <ion-icon name="trophy" class="icon"></ion-icon>
+        </div>
+      <ion-button (click)="takeAssessment(test)" expand="block" *ngIf="!(segment == 'AchievementTest' && disableTest)">
         Take Test
+        <ion-icon slot="end" name="arrow-forward-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button (click)="takeAssessment(test,'result')" expand="block" *ngIf="(segment == 'AchievementTest' && disableTest)" style="margin-top: 10px;">
+        View Results
         <ion-icon slot="end" name="arrow-forward-circle-sharp"></ion-icon>
       </ion-button>
     </ion-card-content>

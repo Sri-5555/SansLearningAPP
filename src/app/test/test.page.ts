@@ -45,6 +45,10 @@ export class TestPage implements OnInit {
     this.showResults = false;
     this.route.paramMap.subscribe(params => {
       this.questionData = history.state.testData;
+      if (history.state?.testResult) {
+        this.showResults = true;
+        this.results = history.state?.testResult;
+      }
       if (this.questionData.category == 'achievement') {
         setTimeout(() => {
           this.getAchievementTestData();
@@ -55,7 +59,7 @@ export class TestPage implements OnInit {
         }, 0);
       }
       this.totalTime = 3600;
-      if (this.questionData.category == 'achievement') {
+      if (this.showResults == false && this.questionData.category == 'achievement') {
         this.startTimer();
       }
     });

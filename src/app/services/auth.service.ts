@@ -36,4 +36,8 @@ export class AuthService {
   getIdToken(): string | null {
     return localStorage.getItem('idToken');
   }
+
+  getUserId(): string | null {
+    return localStorage.getItem('uid');
+  }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
+import { UsersService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-testlist',
@@ -14,14 +16,24 @@ export class TestlistPage implements OnInit {
     { category: 'practice', marks: 50, name: 'Practice Test', questions: [] },
     { category: 'achievement', marks: 50, name: 'Achievement Test', questions: [], time: '1 hr' }
   ];
+  subscriptions;
+  userdetails: any = [];
+  uid:string ='';
+  idToken:string = '';
+  disableTest = false;
 
   constructor(private router: Router,
     public dataService: DataService,
+    private usersService: UsersService,
+    private authService:AuthService
   ) { }
 
   ngOnInit() {
     this.segment = this.router.url.split('/').pop();
     this.assessments = this.segment == "PracticeTest" ? this.assessmentsTypes[0] : this.assessmentsTypes[1];
+    this.uid = this.authService.getUserId()
+    this.idToken = this.authService.getIdToken();
+    this.getProfileDetails();
   }
 
   segmentChanged(event) {
@@ -34,12 +46,36 @@ export class TestlistPage implements OnInit {
     this.assessments = this.segment == "PracticeTest" ? [this.assessmentsTypes[0]] : [this.assessmentsTypes[1]];
   }
 
-  takeAssessment(test) {
-    let data: NavigationExtras = {
-      state: {
-        testData: test
-      }
-    };
-    this.router.navigate(['dashboard/test'],data);
+  takeAssessment(test,from?) {
+    let finalData;
+    if(from == 'result') {
+        let data: NavigationExtras = {
+        state: {
+          testData: test,
+          testResult:this.userdetails?.achievementTestResult
+        }
+      };
+      finalData = data;
+    } else {
+      let data: NavigationExtras = {
+        state: {
+          testData: test,
+        }
+      };
+      finalData = data;
+    }
+    this.router.navigate(['dashboard/test'],finalData);
+  }
+
+  getProfileDetails() {
+    this.subscriptions = this.usersService.getUserDetails(this.uid, this.idToken)
+      .subscribe((user) => {
+        this.userdetails = user;
+        if (this.userdetails?.achievementTestResult) {
+          this.disableTest = true;
+        }
+      }, err => {
+        console.log(err);
+      });
   }
 }

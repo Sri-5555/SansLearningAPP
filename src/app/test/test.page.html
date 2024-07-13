@@ -4,7 +4,7 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title class="toolbar-title">{{this.questionData.category | uppercase}} TEST</ion-title>
-    <div *ngIf="questionData.category == 'achievement'" class="timer-section">
+    <div *ngIf="questionData.category == 'achievement' && this.showResults == false" class="timer-section">
       <ion-icon name="stopwatch-outline" class="time-icon"></ion-icon>
       <span class="timer">{{ minutes }}:{{ seconds | number: '2.0' }}</span>
     </div>

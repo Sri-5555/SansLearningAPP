@@ -27,11 +27,11 @@
       <p class="edit-text" *ngIf="showUserDetails" (click)="isFormDisabled = !isFormDisabled"><ion-icon name="create"
           class="user-edit-icon"></ion-icon>Edit</p>
       <ion-icon [name]="showUserDetails ? 'chevron-up-outline' : 'chevron-down-outline'"
-        (click)="ShowDetails()"></ion-icon>
+        (click)="ShowDetails()" class="accrodion-icon"></ion-icon>
     </ion-item>
 
     <ng-container *ngIf="showUserDetails">
-      <div class="user-form-details">
+      <div class="user-form-details" [ngClass]="{ 'form-input-disabled': isFormDisabled }">
 
         <ion-item lines="none" color="light" class="rowStyle">
           <ion-label class="label-color" position="floating" class="form-lable"><ion-icon name="person-outline"
@@ -40,9 +40,7 @@
             [ngClass]="{ 'form-input-disabled': isFormDisabled }"></ion-input>
         </ion-item>
 
-        <div class="rowStyle" *ngIf="profileForm.controls?.name.touched && profileForm.controls?.name.invalid">
-          <ion-text>Enter valid name</ion-text>
-        </div>
+        <span class="error-message" *ngIf="profileForm.controls?.name.touched && profileForm.controls?.name.invalid">Enter valid name</span>
 
         <ion-item lines="none" color="light" class="rowStyle">
           <ion-label class="label-color" position="floating" class="form-lable"><ion-icon name="man-outline"
@@ -61,10 +59,7 @@
           <ion-input type="number" placeholder="mobile" formControlName="mobile" maxlength="10" class="form-input"
             [ngClass]="{ 'form-input-disabled': isFormDisabled }"></ion-input>
         </ion-item>
-
-        <div class="rowStyle" *ngIf="profileForm.controls?.mobile.touched && profileForm.controls?.mobile.invalid">
-          <ion-text class="error-message">Enter valid mobile number</ion-text>
-        </div>
+        <span class="error-message" *ngIf="profileForm.controls?.mobile.touched && profileForm.controls?.mobile.invalid">Enter valid mobile number</span>
 
         <ion-item lines="none" color="light" class="rowStyle">
           <ion-label class="label-color" position="floating" class="form-lable"><ion-icon name="school"
@@ -112,7 +107,7 @@
       </ion-button>
       <ion-label (click)="showPasswordSection = !showPasswordSection" class="about-items-label">Change Password</ion-label>
       <ion-icon [name]="showPasswordSection ? 'chevron-up-outline' : 'chevron-down-outline'"
-      (click)="showPasswordSection = !showPasswordSection"></ion-icon>
+      (click)="showPasswordSection = !showPasswordSection" class="accrodion-icon"></ion-icon>
     </ion-item>
 
     <ng-container *ngIf="showPasswordSection" [formGroup]="passwordForm">
