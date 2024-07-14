@@ -5,6 +5,7 @@ import { UsersService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { Auth, signOut, updatePassword } from '@angular/fire/auth';
 import { NavController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -43,7 +44,8 @@ export class ProfilePage {
     private fb: FormBuilder,
     private router: Router,
     private auth: Auth,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private alertController: AlertController
   ) { }
 
   ngOnInit(): void {
@@ -149,6 +151,31 @@ export class ProfilePage {
 
   get CPassword() {
     return this.passwordForm.get('cPassword');
+  }
+
+  async logoutConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Confirm Logout',
+      message: 'Are you sure you want to log out?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Logout cancelled');
+          },
+        },
+        {
+          text: 'Logout',
+          handler: () => {
+            this.logout();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }
 

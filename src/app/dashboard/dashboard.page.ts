@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Auth, signOut } from '@angular/fire/auth';
 import { NavController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +11,7 @@ import { NavController } from '@ionic/angular';
 export class DashboardPage {
   
 
-  constructor(private auth: Auth, private navCtrl: NavController) {
+  constructor(private auth: Auth, private navCtrl: NavController, private alertController: AlertController) {
   }
 
   logout() {
@@ -21,5 +22,29 @@ export class DashboardPage {
   
   home() {
     this.navCtrl.navigateRoot('dashboard/studymaterial');
+  }
+
+  async logoutConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Confirm Logout',
+      message: 'Are you sure you want to log out?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          },
+        },
+        {
+          text: 'Logout',
+          handler: () => {
+            this.logout();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }
