@@ -33,7 +33,6 @@ export class TestlistPage implements OnInit {
     this.assessments = this.segment == "PracticeTest" ? this.assessmentsTypes[0] : this.assessmentsTypes[1];
     this.uid = this.authService.getUserId()
     this.idToken = this.authService.getIdToken();
-    this.getProfileDetails();
   }
 
   segmentChanged(event) {
@@ -44,6 +43,9 @@ export class TestlistPage implements OnInit {
   ionViewWillEnter() {
     this.segment = this.router.url.split('/').pop();
     this.assessments = this.segment == "PracticeTest" ? [this.assessmentsTypes[0]] : [this.assessmentsTypes[1]];
+    if (this.segment != 'PracticeTest') {
+      this.getProfileDetails();
+    }
   }
 
   takeAssessment(test,from?) {
@@ -52,7 +54,7 @@ export class TestlistPage implements OnInit {
         let data: NavigationExtras = {
         state: {
           testData: test,
-          testResult:this.userdetails?.achievementTestResult
+          testResult:this.userdetails?.achievementTestResult?.results
         }
       };
       finalData = data;

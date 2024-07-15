@@ -52,7 +52,6 @@ export class DocumentPage implements OnInit {
   }
 
   downloadDocument(url) {
-    console.log('url:', url);
     window.open(url, "_blank");
   }
 

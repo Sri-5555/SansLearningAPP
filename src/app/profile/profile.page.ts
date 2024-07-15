@@ -144,6 +144,10 @@ export class ProfilePage {
       this.toast.warningToast('Please enter valid password');
     }
   }
+  
+  NavigateToAdminPage() {
+    this.router.navigate(['dashboard/adminpage']);
+  }
 
   get newPassword() {
     return this.passwordForm.get('newPassword');

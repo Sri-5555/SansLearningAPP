@@ -63,4 +63,7 @@ export class UsersService {
     return this.http.put(`https://sanslearn-44246-default-rtdb.firebaseio.com/users/${uid}/.json?auth=${token}`,updatedUser);
   }
 
+  getAllUsersDetails(token: string) {
+    return this.http.get(`https://sanslearn-44246-default-rtdb.firebaseio.com/users.json?auth=${token}`);
+  }
 }

@@ -1,7 +1,7 @@
 <ion-header color="primary" class="header">
   <ion-toolbar class="toolbar">
     <ion-title><ion-icon name="book" class="book-icon"></ion-icon>
-    <span class="title-text"> शिक्षामनोविज्ञानम् </span>
+    <span class="title-text"> शिक्षामनोविज्ञानाधिगमः </span>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -33,9 +33,6 @@
     <ion-item *ngFor="let file of documents">
       <ion-label>
         <h2>{{file.name}}</h2>
-        <p>
-          {{file.format}} - {{file.size}}
-        </p>
       </ion-label>
       <ion-button slot="end" (click)="downloadDocument(file.url)"> <ion-icon name="download-outline"></ion-icon> </ion-button>
     </ion-item>

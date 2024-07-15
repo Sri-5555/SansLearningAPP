@@ -51,7 +51,11 @@ const routes: Routes = [
       {
         path: 'chapterView',
         loadChildren: () => import('../chapter-view/chapter-view.module').then(m => m.ChapterViewModule)
-      }
+      },
+      {
+        path: 'adminpage',
+        loadChildren: () => import('../admin-page/admin-page.module').then( m => m.AdminPageModule)
+      },
     ],
   },
 ];

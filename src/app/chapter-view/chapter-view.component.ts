@@ -17,7 +17,7 @@ export class ChapterViewComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.chapterData = history.state.chapterData;
       this.chapterContent = this.chapterData.content;
-      this.chapterUrl = `../../assets/studyMaterials/${this.chapterData.url}`;
+      this.chapterUrl = this.chapterData.url;
     });
     this.fileName = '';
   }
@@ -26,7 +26,7 @@ export class ChapterViewComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.chapterData = history.state.chapterData;
       this.chapterContent = this.chapterData.content;
-      this.chapterUrl = `../../assets/studyMaterials/${this.chapterData.url}`;
+      this.chapterUrl = this.chapterData.url;
     });
     this.fileName = '';
   }

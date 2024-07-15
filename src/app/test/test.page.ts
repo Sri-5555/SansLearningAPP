@@ -19,6 +19,7 @@ export class TestPage implements OnInit {
   selectedChoice: string = '';
   showResults = false;
   results: any[] = [];
+  testResults: any = { time: '', marks: '', results: [] };
 
   totalTime: number = 0;
   minutes: number = 0;
@@ -143,6 +144,7 @@ export class TestPage implements OnInit {
       } else {
         this.showResults = true;
         if (this.questionData.category == 'achievement') {
+          this.updateTestResults();
           this.timerSubscription.unsubscribe();
           this.submitAnswers();
         }
@@ -151,6 +153,7 @@ export class TestPage implements OnInit {
     }
     if (from == 'submit') {
       this.showResults = true;
+      this.updateTestResults();
       this.timerSubscription.unsubscribe();
       this.scrollToTop();
       if (this.questionData.category == 'achievement') {
@@ -160,12 +163,18 @@ export class TestPage implements OnInit {
     }
   }
 
+  updateTestResults() {
+    this.testResults['time'] = this.calculateTotalTimeTaken();
+    this.testResults['marks'] = this.getCorrectAnswerNumber();
+    this.testResults['results'] = this.results;
+  }
+
   submitAnswers() {
     let uid = localStorage.getItem('uid');
     let idToken = localStorage.getItem('idToken');
     this.usersService.getUserDetails(uid,idToken)
       .subscribe((user: any) => {
-        user.achievementTestResult = this.results;
+        user.achievementTestResult = this.testResults;
         this.usersService
         .updateUserDetails(uid,idToken,user)
         .subscribe(res => {
@@ -178,6 +187,12 @@ export class TestPage implements OnInit {
         console.log(err);
       });
   }
+
+  calculateTotalTimeTaken(): string {
+    const totalSeconds = 3600 - (this.minutes * 60 + this.seconds);
+    const minutes = Math.floor(totalSeconds / 60);
+    return `${minutes}m`;
+}
 
   goToPreviousQuestion() {
     if (this.currentQuestionIndex > 0) {
