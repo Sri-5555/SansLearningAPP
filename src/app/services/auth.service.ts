@@ -26,6 +26,7 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
+    localStorage.removeItem('authToken');
     return from(this.auth.signOut());
   }
 
@@ -39,5 +40,10 @@ export class AuthService {
 
   getUserId(): string | null {
     return localStorage.getItem('uid');
+  }
+
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('idToken');
   }
 }

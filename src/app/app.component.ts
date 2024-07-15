@@ -21,9 +21,21 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
+
+      this.platform.backButton.subscribeWithPriority(10, () => {
+        if (this.router.url === '/dashboard/studymaterial') {
+          // Prevent going back to the login page
+          navigator['app'].exitApp();
+        } else {
+          window.history.back();
+        }
+      });
+
+
       this.auth.onAuthStateChanged(user => {
+        console.log("user",user);
         if (user) {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/dashboard/studymaterial']);
         }
         else {
           this.router.navigate(['/login']);
