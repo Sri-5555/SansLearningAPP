@@ -16,6 +16,16 @@ export class AdminPage implements OnInit{
   subscriptions;
   userDetails:any;
   idToken:string = '';
+  selectedUniversity:any = [];
+  selectedGender:any = [];
+  filteredUsers: any;
+  selectUniversityOptions = {
+    header: 'Select University'
+  };
+  selectGenderOptions = {
+    header: 'Select Gender'
+  };
+  isLoading: boolean = false;
 
   constructor(
     public toast: ToastService,
@@ -38,6 +48,7 @@ export class AdminPage implements OnInit{
   }
 
   getProfileDetails() {
+    this.isLoading = true;
     this.subscriptions = this.usersService
       .getAllUsersDetails(this.idToken)
       .pipe(
@@ -53,10 +64,31 @@ export class AdminPage implements OnInit{
       )
       .subscribe((data) => {
         this.userDetails = data;
-        console.log("userDetails", this.userDetails);
+        this.filteredUsers = JSON.parse(JSON.stringify(this.userDetails));
+        this.isLoading = false;
       }, err => {
         console.log(err);
+        this.isLoading = false;
       });
   }
 
+  filterUsers() {
+    let filteredUsers = this.userDetails;
+    if (this.selectedUniversity.length > 0) {
+      filteredUsers = filteredUsers.filter((user) =>
+        this.selectedUniversity.includes(user.university)
+      );
+    }
+    if (this.selectedGender.length > 0) {
+      filteredUsers = filteredUsers.filter((user) =>
+        this.selectedGender.includes(user.gender)
+      );
+    }
+    this.filteredUsers = filteredUsers;
+  }
+
+  getUniqueUniversity(): any[] {
+    return [...new Set(this.userDetails?.map(user => user.university)
+      .filter(university => university && university.trim() !== ''))];
+  }
 }

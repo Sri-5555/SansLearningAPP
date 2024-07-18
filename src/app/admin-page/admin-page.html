@@ -7,8 +7,23 @@
 <ion-content>
     <div>
         <h2 class="user-details-text">User Details</h2>
+        <div class="filters" *ngIf="!isLoading">
+            <h6 class="filter-label">Filters:</h6>
+            <ion-buttons slot="end">
+                <ion-label>University</ion-label>
+                <ion-select placeholder="University" multiple="true" [(ngModel)]="selectedUniversity" (ionChange)="filterUsers()" [interfaceOptions]="selectUniversityOptions">
+                    <ion-select-option *ngFor="let university of getUniqueUniversity()" [value]="university">{{ university }}</ion-select-option>
+                </ion-select>
+            </ion-buttons>
+            <ion-buttons slot="end">
+                <ion-label>Gender</ion-label>
+                <ion-select placeholder="Gender" multiple="true" [(ngModel)]="selectedGender" (ionChange)="filterUsers()" [interfaceOptions]="selectGenderOptions">
+                    <ion-select-option *ngFor="let gender of ['male','female']" [value]="gender">{{ gender}}</ion-select-option>
+                </ion-select>
+            </ion-buttons> 
+        </div>
     </div>
-    <div class="table-responsive">
+    <div class="table-responsive"  *ngIf="!isLoading">
         <table class="table table-striped">
             <thead >
                 <tr>
@@ -23,7 +38,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of userDetails">
+                <tr *ngFor="let user of filteredUsers">
                     <td>{{ user.name }}</td>
                     <td>{{ user.gender }}</td>
                     <td>{{ user.email }}</td>
@@ -35,5 +50,11 @@
                 </tr>
             </tbody>
         </table>
+        <div *ngIf="!isLoading && filteredUsers?.length == 0" class="no-results">
+            <span>No Results Found</span>
+        </div>
     </div>
+    <div class="loaders" *ngIf="isLoading">
+        <img src="/assets/Images/loader.svg">
+      </div>
 </ion-content>

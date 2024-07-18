@@ -1,7 +1,7 @@
 .table-responsive {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 0px 10px !important;
+    margin: 0px 10px !important;
   }
   
   .table {
@@ -54,5 +54,24 @@
   .user-details-text {
     font-size: 16px;
     margin: 0 !important;
-    padding: 10px 10px;
+    padding: 10px 10px 0px 10px;
+  }
+
+  .filters {
+    font-size: 12px !important;
+    padding: 0px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .filter-label {
+    font-size: 14px;
+    color: var(--ion-color-primary);
+  }
+
+  .no-results {
+    font-size: 12px;
+    padding-bottom: 10px;
+    text-align: center;
   }
