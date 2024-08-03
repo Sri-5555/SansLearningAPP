@@ -56,6 +56,10 @@ export class UsersService {
     return this.http.get(`${this.baseUrl}/users/${uid}/.json?auth=${token}`);
   }
 
+  getAchievementTestStatus(token: string) {
+    return this.http.get(`${this.baseUrl}/acTestStatus/.json?auth=${token}`);
+  }
+
   updateUserDetails(uid: string, token: string, updatedUser: any) {
     return this.http.put(`${this.baseUrl}/users/${uid}/.json?auth=${token}`,updatedUser);
   }

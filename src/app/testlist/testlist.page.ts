@@ -21,6 +21,7 @@ export class TestlistPage implements OnInit {
   uid:string ='';
   idToken:string = '';
   disableTest = false;
+  acheievementTestEnable:boolean = false;
 
   constructor(private router: Router,
     public dataService: DataService,
@@ -44,6 +45,7 @@ export class TestlistPage implements OnInit {
     this.segment = this.router.url.split('/').pop();
     this.assessments = this.segment == "PracticeTest" ? [this.assessmentsTypes[0]] : [this.assessmentsTypes[1]];
     if (this.segment != 'PracticeTest') {
+      this.getAchievementTestStatus();
       this.getProfileDetails();
     }
   }
@@ -75,6 +77,18 @@ export class TestlistPage implements OnInit {
         this.userdetails = user;
         if (this.userdetails?.achievementTestResult) {
           this.disableTest = true;
+        }
+      }, err => {
+        console.log(err);
+      });
+  }
+
+  getAchievementTestStatus() {
+    this.subscriptions = this.usersService.getAchievementTestStatus(this.idToken)
+      .subscribe((data) => {
+        const status:any = data;
+        if(status) {
+          this.acheievementTestEnable = status?.status;
         }
       }, err => {
         console.log(err);
