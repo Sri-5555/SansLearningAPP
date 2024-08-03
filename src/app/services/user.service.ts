@@ -13,11 +13,13 @@ import { AuthService } from './auth.service';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
+  private baseUrl: string = environment.firebaseConfig.databaseURL;
   constructor(private firestore: Firestore, private authService: AuthService,
     private fireauth: AngularFireAuth,
     private database: AngularFireDatabase,
@@ -50,20 +52,15 @@ export class UsersService {
     return from(setDoc(ref, user));
   }
 
-  // updateUser(user: ProfileUser): Observable<void> {
-  //   const ref = doc(this.firestore, 'users', user.uid);
-  //   return from(updateDoc(ref, { ...user }));
-  // }
-
   getUserDetails(uid: string, token: string) {
-    return this.http.get(`https://sanslearn-44246-default-rtdb.firebaseio.com/users/${uid}/.json?auth=${token}`);
+    return this.http.get(`${this.baseUrl}/users/${uid}/.json?auth=${token}`);
   }
 
   updateUserDetails(uid: string, token: string, updatedUser: any) {
-    return this.http.put(`https://sanslearn-44246-default-rtdb.firebaseio.com/users/${uid}/.json?auth=${token}`,updatedUser);
+    return this.http.put(`${this.baseUrl}/users/${uid}/.json?auth=${token}`,updatedUser);
   }
 
   getAllUsersDetails(token: string) {
-    return this.http.get(`https://sanslearn-44246-default-rtdb.firebaseio.com/users.json?auth=${token}`);
+    return this.http.get(`${this.baseUrl}/users.json?auth=${token}`);
   }
 }

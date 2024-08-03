@@ -1,12 +1,10 @@
-export const environment = {
-  production: true,
-  firebaseConfig : {
-    apiKey: "AIzaSyAtxTVUdTqLx53BpulXyDOzXduNdlXKJsI",
-    authDomain: "sanslearn-62061.firebaseapp.com",
-    projectId: "sanslearn-62061",
-    storageBucket: "sanslearn-62061.appspot.com",
-    messagingSenderId: "1001446927482",
-    appId: "1:1001446927482:web:5fc02932c0da9319bb5fc3",
-    measurementId: "G-WD55VVB78N"
-  }
+const firebaseConfig = {
+  apiKey: "AIzaSyDzZw4r68L7K2nmPx2rN4a16BHPG5WCqBM",
+  authDomain: "epllearning-app.firebaseapp.com",
+  databaseURL: "https://epllearning-app-default-rtdb.firebaseio.com",
+  projectId: "epllearning-app",
+  storageBucket: "epllearning-app.appspot.com",
+  messagingSenderId: "736027093369",
+  appId: "1:736027093369:web:8bda6a46f867c354c7a7a8",
+  measurementId: "G-Y7XW1XHKGC"
 };
