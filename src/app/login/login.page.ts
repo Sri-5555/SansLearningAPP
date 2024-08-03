@@ -53,7 +53,7 @@ export class LoginPage {
             setTimeout(() => {
               this.toast.sucessToast("Login successfull");
               this.navCntrl.navigateForward('dashboard/studymaterial');
-            }, 100);
+            }, 1000);
           }).catch(err => {
             console.error("Failed to get ID token:", err);
             this.toast.warningToast("Failed to get ID token");
