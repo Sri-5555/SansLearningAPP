@@ -13,7 +13,7 @@ export class TestlistPage implements OnInit {
   segment:any;
   assessments: any;
   assessmentsTypes: any = [
-    { category: 'practice', marks: 50, name: 'Practice Test', questions: [] },
+    { category: 'practice', marks: 100, name: 'Practice Test', questions: [] },
     { category: 'achievement', marks: 50, name: 'Achievement Test', questions: [], time: '1 hr' }
   ];
   subscriptions;

@@ -18,6 +18,7 @@ export class TestPage implements OnInit {
   currentQuestion;
   selectedChoice: string = '';
   showResults = false;
+  testSubmitted = false;
   results: any[] = [];
   testResults: any = { time: '', marks: '', results: [] };
 
@@ -44,10 +45,14 @@ export class TestPage implements OnInit {
 
   getQuestions() {
     this.showResults = false;
+    this.testSubmitted = false;
+    this.currentQuestionIndex = 0;
+    this.questions = [];
     this.route.paramMap.subscribe(params => {
       this.questionData = history.state.testData;
       if (history.state?.testResult) {
         this.showResults = true;
+        this.testSubmitted = true;
         this.results = history.state?.testResult;
       }
       if (this.questionData.category == 'achievement') {
@@ -71,6 +76,7 @@ export class TestPage implements OnInit {
     this.dataService
       .getPracticeTesttData().subscribe((data) => {
         this.questions = data;
+        this.shuffleArray(this.questions);
         this.currentQuestion = this.questions[0];
         setTimeout(() => {
           this.isLoading = false;
@@ -86,6 +92,7 @@ export class TestPage implements OnInit {
     this.dataService
       .getAchievementTestData().subscribe((data) => {
         this.questions = data;
+        this.shuffleArray(this.questions);
         this.currentQuestion = this.questions[0];
         setTimeout(() => {
           this.isLoading = false;
@@ -104,7 +111,6 @@ export class TestPage implements OnInit {
       this.totalTime--;
       this.minutes = Math.floor(this.totalTime / 60);
       this.seconds = this.totalTime % 60;
-      console.log("time", this.minutes, this.seconds);
       if (this.totalTime <= 0) {
         this.timerSubscription.unsubscribe();
         this.submitAnswer('submit');
@@ -143,6 +149,7 @@ export class TestPage implements OnInit {
         }
       } else {
         this.showResults = true;
+        this.testSubmitted = true;
         if (this.questionData.category == 'achievement') {
           this.updateTestResults();
           this.timerSubscription.unsubscribe();
@@ -153,13 +160,13 @@ export class TestPage implements OnInit {
     }
     if (from == 'submit') {
       this.showResults = true;
+      this.testSubmitted = true;
       this.updateTestResults();
       this.timerSubscription.unsubscribe();
       this.scrollToTop();
       if (this.questionData.category == 'achievement') {
         this.submitAnswers();
       }
-      console.log("result",this.results);
     }
   }
 
@@ -179,8 +186,10 @@ export class TestPage implements OnInit {
         .updateUserDetails(uid,idToken,user)
         .subscribe(res => {
           this.toast.sucessToast('Test Submitted successfully');
+          this.testSubmitted = true;
         }, err => {
           this.toast.sucessToast('Test Submitted failed');
+          this.testSubmitted = true;
         });
         this.isLoading = false;
       }, err => {
@@ -231,6 +240,13 @@ export class TestPage implements OnInit {
 
   ionViewWillLeave() {
     this.stopTimer();
+  }
+
+  shuffleArray(array: any[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
   }
 }
 

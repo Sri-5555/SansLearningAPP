@@ -31,7 +31,7 @@
   <ion-card *ngFor="let test of assessments" class="test-card" [ngClass]="{'card-color-green': segment === 'AchievementTest' && disableTest}">
     <ion-card-content>
       <div class="test-name"><span class="test-content">Test Name: </span>{{test.name}}</div>
-      <div class="test-questions"><span class="test-content">Questions: </span>{{50}}</div>
+      <div class="test-questions"><span class="test-content">Questions: </span>{{test.marks}}</div>
       <div class="test-time" *ngIf="test.category == 'achievement'">
         <ion-icon name="stopwatch-outline" class="time-icon"></ion-icon>
         <span class="test-content">Time: </span>1 hr</div>
