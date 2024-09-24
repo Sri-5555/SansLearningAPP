@@ -91,9 +91,13 @@
   }
   
   .book-icon {
-    font-size: 24px;
+    width: 50px;
     margin-right: 5px;
-    color: #ffffff;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
   }
   
   .title-text {

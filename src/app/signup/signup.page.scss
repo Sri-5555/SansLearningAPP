@@ -77,9 +77,16 @@ ion-title {
 
   .icon-container {
     margin-top: 10px;
+    height: 125px !important;
+    display: flex;
+    justify-content: center;
   }
 
   .signup-input {
     color: black !important;
     font-size: 16px !important;
+  }
+
+  .logo-img {
+    width: 80px;
   }
