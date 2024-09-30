@@ -1,0 +1,15 @@
+# dependencies
+/node_modules
+package-lock.json
+/.angular
+
+# compiled output
+/dist
+/www
+/tmp
+/out-tsc
+/platforms
+/plugins
+/resources/android
+/resources/ios
+/package-lock.json

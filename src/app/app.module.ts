@@ -18,6 +18,7 @@ import { File } from '@ionic-native/file/ngx';
 import { AngularFireModule } from '@angular/fire/compat';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { ErrorInterceptor } from './services/error.interceptor';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,
@@ -29,7 +30,8 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
   ],
   providers: [VideoPlayer, File,
     HTTP, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 
