@@ -22,6 +22,13 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
 
+      setTimeout(() => {
+        const splash = document.getElementById('custom-splash-screen');
+        if (splash) {
+          splash.style.display = 'none';
+        }
+      }, 3000);
+
       this.platform.backButton.subscribeWithPriority(10, () => {
         if (this.router.url === '/dashboard/studymaterial') {
           // Prevent going back to the login page

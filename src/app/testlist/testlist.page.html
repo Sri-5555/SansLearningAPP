@@ -41,7 +41,7 @@
         <div class="test-completed" *ngIf="segment == 'AchievementTest' && disableTest">Test completed
           <ion-icon name="trophy" class="icon"></ion-icon>
         </div>
-      <ion-button [disabled]="(segment == 'AchievementTest' && acheievementTestEnable == false)" (click)="takeAssessment(test)" expand="block" *ngIf="!(segment == 'AchievementTest' && disableTest)">
+      <ion-button  [disabled]="(segment == 'AchievementTest' && acheievementTestEnable == false)" (click)="takeAssessment(test)" expand="block" *ngIf="!(segment == 'AchievementTest' && disableTest)">
         Take Test
         <ion-icon slot="end" name="arrow-forward-circle-sharp"></ion-icon>
       </ion-button>

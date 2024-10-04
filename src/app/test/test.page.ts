@@ -127,16 +127,20 @@ export class TestPage implements OnInit {
         id: this.currentQuestion.id,
         question: this.currentQuestion.question,
         selectedChoice: this.selectedChoice,
-        correctChoice: this.currentQuestion.correctChoice,
-        isAnsCorrect: this.selectedChoice == this.currentQuestion.correctChoice
+        correctChoice: this.currentQuestion.correctChoice ||  this.currentQuestion.correct_choice,
+        isAnsCorrect: this.selectedChoice == this.currentQuestion.correctChoice ||  this.currentQuestion.correct_choice
       };
+      console.log("result",result);
       // Update the answer if it already exists, otherwise push it to the results array
       const existingResultIndex = this.results.findIndex(r => r.question === this.currentQuestion.question);
+      console.log("existingResultIndex",existingResultIndex);
       if (existingResultIndex > -1) {
         this.results[existingResultIndex] = result;
       } else {
         this.results.push(result);
       }
+
+      console.log(" this.results", this.results);
       this.selectedChoice = '';
       this.currentQuestionIndex++;
   
@@ -144,6 +148,7 @@ export class TestPage implements OnInit {
         this.currentQuestion = this.questions[this.currentQuestionIndex];
         // Check if there's already an answer for this question
         const existingAnswer = this.results.find(r => r.question === this.currentQuestion.question);
+        console.log("existingAnswer",existingAnswer)
         if (existingAnswer) {
           this.selectedChoice = existingAnswer.selectedChoice;
         }

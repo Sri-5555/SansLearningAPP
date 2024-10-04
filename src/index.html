@@ -17,9 +17,33 @@
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <style>
+    #custom-splash-screen {
+      background-color: #ffffff;
+      text-align: center;
+      font-size: 24px;
+    }
+  
+    .splash-content h1 {
+      color: #000;
+    }
+  
+    .splash-content img {
+      width: 150px;
+      height: 150px;
+    }
+  </style>
 </head>
 
 <body>
+  <!-- index.html -->
+<div id="custom-splash-screen" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: #3880ff; z-index: 9999; display: flex; justify-content: center; align-items: center;">
+  <div class="splash-content">
+    <!-- Add your HTML content, like a logo, animation, etc. -->
+    <img src="./assets/Images/logo.png" alt="Logo" />
+  </div>
+</div>
+
   <app-root></app-root>
 </body>
 

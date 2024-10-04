@@ -77,6 +77,8 @@ export class TestlistPage implements OnInit {
         this.userdetails = user;
         if (this.userdetails?.achievementTestResult) {
           this.disableTest = true;
+        } else{
+          this.disableTest = false;
         }
       }, err => {
         console.log(err);
