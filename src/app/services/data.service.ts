@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,36 +10,44 @@ export class DataService {
   idToken:string = '';
   private baseUrl: string = environment.firebaseConfig.databaseURL;
 
-  constructor(private http: HttpClient) {
-    this.idToken = localStorage.getItem('idToken');
+  constructor(private http: HttpClient,
+    private authService: AuthService
+  ) {
   }
 
   postChapterData(data: any) {
-    return this.http.post(`${this.baseUrl}/chapters/.json?auth=${this.idToken}`,data);
+    let idToken = this.authService.getIdToken() || localStorage.getItem('idToken');
+    return this.http.post(`${this.baseUrl}/chapters/.json?auth=${idToken}`,data);
   }
 
   getChapterData() {
-    return this.http.get(`${this.baseUrl}/chapters/.json?auth=${this.idToken}`);
+    let idToken = this.authService.getIdToken() || localStorage.getItem('idToken');
+    return this.http.get(`${this.baseUrl}/chapters/.json?auth=${idToken}`);
   }
 
   getVideoData() {
-    return this.http.get(`${this.baseUrl}/videos/.json?auth=${this.idToken}`);
+    let idToken = this.authService.getIdToken() || localStorage.getItem('idToken');
+    return this.http.get(`${this.baseUrl}/videos/.json?auth=${idToken}`);
   }
 
   getDocumentData() {
-    return this.http.get(`${this.baseUrl}/documents/.json?auth=${this.idToken}`);
+    let idToken = this.authService.getIdToken() || localStorage.getItem('idToken');
+    return this.http.get(`${this.baseUrl}/documents/.json?auth=${idToken}`);
   }
 
   getAssessmentsData() {
-    return this.http.get(`${this.baseUrl}/assessments/.json?auth=${this.idToken}`);
+    let idToken = this.authService.getIdToken() || localStorage.getItem('idToken');
+    return this.http.get(`${this.baseUrl}/assessments/.json?auth=${idToken}`);
   }
 
   getPracticeTesttData() {
-    return this.http.get(`${this.baseUrl}/practicetest/.json?auth=${this.idToken}`);
+    let idToken = this.authService.getIdToken() || localStorage.getItem('idToken');
+    return this.http.get(`${this.baseUrl}/practicetest/.json?auth=${idToken}`);
   }
 
   getAchievementTestData() {
-    return this.http.get(`${this.baseUrl}/actest/.json?auth=${this.idToken}`);
+    let idToken = this.authService.getIdToken() || localStorage.getItem('idToken');
+    return this.http.get(`${this.baseUrl}/actest/.json?auth=${idToken}`);
   }
 
 }

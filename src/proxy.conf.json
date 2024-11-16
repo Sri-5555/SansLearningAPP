@@ -1,0 +1,11 @@
+{
+    "/api": {
+      "target": "http://eplshikshamanovijnanam.info",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
+  }
+  

@@ -14,6 +14,7 @@ import { from, Observable } from 'rxjs';
 })
 export class AuthService {
   currentUser$ = authState(this.auth);
+  idToken:any = '';
 
   constructor(private auth: Auth) {}
 
@@ -31,10 +32,14 @@ export class AuthService {
   }
 
   saveIdToken(token: string): void {
+    this.idToken = token;
     localStorage.setItem('idToken', token);
   }
 
   getIdToken(): string | null {
+    if(this.idToken != ''){
+      return this.idToken;
+    }
     return localStorage.getItem('idToken');
   }
 

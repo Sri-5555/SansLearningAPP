@@ -1,0 +1,12 @@
+keystorename: lep.keystore
+alias name: lep
+password: welcome@lep
+
+//to generate keystore
+
+
+
+keytool -genkey -v -keystore lep.keystore -alias lep -keyalg RSA -keysize 2048 -validity 10000
+
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore keys/lep.keystore platforms/android/app/build/outputs/bundle/release/app-release.aab lep

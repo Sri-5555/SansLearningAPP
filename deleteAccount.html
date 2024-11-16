@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Account</title>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            background-color: #ff4b4b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #ff0000;
+        }
+
+        .message {
+            margin-top: 20px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Delete Account</h1>
+        <p>Please log in to delete your account.</p>
+
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <input type="password" id="password" placeholder="Enter your password" required>
+            <button type="submit">Log In</button>
+        </form>
+
+        <div id="deleteSection" style="display: none;">
+            <p>You're logged in. Click the button below to delete your account.</p>
+            <button id="deleteAccountBtn">Delete My Account</button>
+        </div>
+
+        <div class="message" id="message"></div>
+    </div>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey:  "AIzaSyDzZw4r68L7K2nmPx2rN4a16BHPG5WCqBM",
+            authDomain: "epllearning-app.firebaseapp.com",
+            projectId: "epllearning-app",
+            storageBucket: "epllearning-app.appspot.com",
+            messagingSenderId: "epllearning-app.appspot.com",
+            appId: "1:736027093369:web:8bda6a46f867c354c7a7a8",
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Handle login
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    document.getElementById('loginForm').style.display = 'none';
+                    document.getElementById('deleteSection').style.display = 'block';
+                })
+                .catch((error) => {
+                    document.getElementById('message').textContent = error.message;
+                });
+        });
+
+        // Handle account deletion
+        document.getElementById('deleteAccountBtn').addEventListener('click', function() {
+            const user = auth.currentUser;
+
+            if (user) {
+                user.delete()
+                    .then(() => {
+                        document.getElementById('message').textContent = 'Account deleted successfully.';
+                    })
+                    .catch((error) => {
+                        if (error.code === 'auth/requires-recent-login') {
+                            document.getElementById('message').textContent = 'Please log in again before deleting your account.';
+                        } else {
+                            document.getElementById('message').textContent = error.message;
+                        }
+                    });
+            }
+        });
+    </script>
+
+</body>
+</html>

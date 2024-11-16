@@ -24,7 +24,9 @@ export class ChapterViewComponent implements OnInit {
 
   ionViewWillEnter() {
     this.route.paramMap.subscribe(params => {
+      console.log("params", params);
       this.chapterData = history.state.chapterData;
+      console.log(" this.chapterData",  this.chapterData);
       this.chapterContent = this.chapterData.content;
       this.chapterUrl = this.chapterData.url;
     });

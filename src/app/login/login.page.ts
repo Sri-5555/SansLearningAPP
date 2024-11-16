@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
-
+import { AuthService } from '../services/auth.service';
 import {
   Auth,
   signInWithEmailAndPassword
@@ -18,6 +18,7 @@ export class LoginPage {
   loginForm: FormGroup;
 
   constructor(public navCntrl: NavController, private auth: Auth, public formBuilder: FormBuilder,
+    private authService: AuthService,
     public toast: ToastService) {
     this.createLoginForm();
   }
@@ -50,10 +51,11 @@ export class LoginPage {
           localStorage.setItem('uid',res.user.uid);
           res.user?.getIdToken().then(idToken => {
             localStorage.setItem('idToken',idToken);
+            this.authService.saveIdToken(idToken);
             setTimeout(() => {
               this.toast.sucessToast("Login successfull");
               this.navCntrl.navigateForward('dashboard/studymaterial');
-            }, 1000);
+            }, 1500);
           }).catch(err => {
             console.error("Failed to get ID token:", err);
             this.toast.warningToast("Failed to get ID token");
